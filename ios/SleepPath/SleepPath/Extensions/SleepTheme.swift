@@ -3,14 +3,11 @@ import SwiftUI
 enum SleepTheme {
     static let background = Color.appBackground
     static let card = Color.appCard
-    static let cardBackground = Color.appCard
-    static let cardBackgroundLight = Color.appCardElevated
     static let cardElevated = Color.appCardElevated
     static let accent = Color.appAccent
     static let textPrimary = Color.appText
     static let textSecondary = Color.appSecondary
     static let textTertiary = Color.appTextDimmed
-    static let amber = Color.appAccent
     static let destructive = Color.destructive
     static let success = Color.success
 

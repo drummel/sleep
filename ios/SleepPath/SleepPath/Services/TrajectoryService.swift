@@ -18,6 +18,7 @@ struct TrajectoryBlock: Identifiable, Sendable {
     /// A longer description with actionable advice.
     let subtitle: String
     /// SF Symbol icon name.
+    /// Note: This is redundant with `type.icon` but kept as a stored property for API compatibility.
     let icon: String
 
     /// Duration of this block in minutes.
@@ -36,11 +37,16 @@ struct TrajectoryBlock: Identifiable, Sendable {
         Date() >= endTime
     }
 
-    /// A formatted time range string for display (e.g., "9:00 AM - 10:30 AM").
-    var formattedTimeRange: String {
+    /// Cached time formatter for display strings.
+    private static let timeFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
-        return "\(formatter.string(from: startTime)) - \(formatter.string(from: endTime))"
+        return formatter
+    }()
+
+    /// A formatted time range string for display (e.g., "9:00 AM - 10:30 AM").
+    var formattedTimeRange: String {
+        return "\(Self.timeFormatter.string(from: startTime)) - \(Self.timeFormatter.string(from: endTime))"
     }
 }
 

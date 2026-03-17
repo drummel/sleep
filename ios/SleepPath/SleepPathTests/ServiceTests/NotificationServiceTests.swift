@@ -342,4 +342,57 @@ final class NotificationServiceTests: XCTestCase {
         )
         XCTAssertNotEqual(n1.id, n2.id)
     }
+
+    // MARK: - Empty Trajectory
+
+    func test_scheduleNotifications_emptyTrajectory_noBlockNotifications() {
+        let prefs = NotificationPreferences()
+        service.scheduleNotifications(for: [], preferences: prefs)
+        // Only weekly summary should be present (if enabled)
+        let nonWeekly = service.scheduledNotifications.filter { $0.type != .weeklySummary }
+        XCTAssertTrue(nonWeekly.isEmpty, "Empty trajectory should produce no block notifications")
+    }
+
+    func test_scheduleNotifications_emptyTrajectory_weeklySummaryStillIncluded() {
+        var prefs = NotificationPreferences()
+        prefs.weeklySummaryEnabled = true
+        service.scheduleNotifications(for: [], preferences: prefs)
+        let weeklySummary = service.scheduledNotifications.filter { $0.type == .weeklySummary }
+        XCTAssertFalse(weeklySummary.isEmpty)
+    }
+
+    // MARK: - Notification Content Strings
+
+    func test_notificationContent_sunlightHasTitleAndBody() {
+        let blocks = makeSampleBlocks()
+        let prefs = NotificationPreferences()
+        service.scheduleNotifications(for: blocks, preferences: prefs)
+
+        let sunlight = service.scheduledNotifications.first { $0.type == .sunlight }
+        XCTAssertNotNil(sunlight)
+        XCTAssertEqual(sunlight?.title, "Time for Sunlight")
+        XCTAssertTrue(sunlight?.body.contains("natural light") ?? false)
+    }
+
+    func test_notificationContent_caffeineCutoffMentionsTime() {
+        let blocks = makeSampleBlocks()
+        let prefs = NotificationPreferences()
+        service.scheduleNotifications(for: blocks, preferences: prefs)
+
+        let cutoff = service.scheduledNotifications.first { $0.type == .caffeineCutoff }
+        XCTAssertNotNil(cutoff)
+        XCTAssertEqual(cutoff?.title, "Caffeine Cutoff")
+        XCTAssertTrue(cutoff?.body.contains("Last call") ?? false)
+    }
+
+    func test_notificationContent_peakFocusHasContent() {
+        let blocks = makeSampleBlocks()
+        var prefs = NotificationPreferences()
+        prefs.peakFocusEnabled = true
+        service.scheduleNotifications(for: blocks, preferences: prefs)
+
+        let peak = service.scheduledNotifications.first { $0.type == .peakFocus }
+        XCTAssertNotNil(peak)
+        XCTAssertEqual(peak?.title, "Peak Focus Starting")
+    }
 }

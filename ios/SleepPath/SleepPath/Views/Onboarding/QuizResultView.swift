@@ -20,7 +20,7 @@ struct QuizResultView: View {
             // Radial glow behind the emoji
             RadialGradient(
                 colors: [
-                    SleepTheme.amber.opacity(0.08),
+                    SleepTheme.accent.opacity(0.08),
                     Color.clear,
                 ],
                 center: .center,
@@ -81,12 +81,12 @@ struct QuizResultView: View {
 
             Text(chronotype.tagline)
                 .font(.system(size: 18, weight: .medium))
-                .foregroundStyle(SleepTheme.amberGradient)
+                .foregroundStyle(SleepTheme.accentGradient)
         }
     }
 
     private var descriptionSection: some View {
-        Text(chronotype.description)
+        Text(chronotype.detailedDescription)
             .font(.system(size: 16, weight: .regular))
             .foregroundColor(SleepTheme.textSecondary)
             .multilineTextAlignment(.center)
@@ -114,7 +114,7 @@ struct QuizResultView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 18)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 
@@ -126,7 +126,7 @@ struct QuizResultView: View {
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 18)
-                    .background(SleepTheme.amberGradient, in: RoundedRectangle(cornerRadius: 16))
+                    .background(SleepTheme.accentGradient, in: RoundedRectangle(cornerRadius: 16))
             }
             .buttonStyle(.plain)
 
@@ -137,12 +137,12 @@ struct QuizResultView: View {
                     Text("Share Your Chronotype")
                         .font(.system(size: 15, weight: .semibold))
                 }
-                .foregroundColor(SleepTheme.amber)
+                .foregroundColor(SleepTheme.accent)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(SleepTheme.amber.opacity(0.4), lineWidth: 1.5)
+                        .stroke(SleepTheme.accent.opacity(0.4), lineWidth: 1.5)
                 )
             }
             .buttonStyle(.plain)
@@ -179,7 +179,7 @@ private struct StatRow: View {
         HStack(spacing: 14) {
             Image(systemName: icon)
                 .font(.system(size: 16, weight: .medium))
-                .foregroundStyle(SleepTheme.amber)
+                .foregroundStyle(SleepTheme.accent)
                 .frame(width: 32)
 
             Text(label)

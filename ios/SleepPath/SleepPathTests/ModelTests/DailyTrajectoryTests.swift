@@ -183,4 +183,78 @@ final class DailyTrajectoryTests: XCTestCase {
         )
         XCTAssertNotEqual(block1.id, block2.id)
     }
+
+    func test_trajectoryBlock_zeroDuration() {
+        let now = Date()
+        let block = TrajectoryBlock(
+            type: .sunlight, startTime: now, endTime: now,
+            energyState: .rising, title: "T", subtitle: "S", icon: "sun.max.fill"
+        )
+        XCTAssertEqual(block.durationMinutes, 0)
+    }
+
+    func test_trajectoryBlock_isActive_deterministic() {
+        let now = Date()
+        let past = now.addingTimeInterval(-7200)
+        let future = now.addingTimeInterval(7200)
+
+        let activeBlock = TrajectoryBlock(
+            type: .peakFocus, startTime: past, endTime: future,
+            energyState: .peak, title: "T", subtitle: "S", icon: "bolt.fill"
+        )
+        XCTAssertTrue(activeBlock.isActive)
+
+        let pastBlock = TrajectoryBlock(
+            type: .peakFocus, startTime: past.addingTimeInterval(-7200), endTime: past,
+            energyState: .peak, title: "T", subtitle: "S", icon: "bolt.fill"
+        )
+        XCTAssertFalse(pastBlock.isActive)
+    }
+
+    func test_trajectoryBlock_isPast_deterministic() {
+        let now = Date()
+        let past = now.addingTimeInterval(-7200)
+
+        let pastBlock = TrajectoryBlock(
+            type: .sunlight, startTime: past.addingTimeInterval(-3600), endTime: past,
+            energyState: .rising, title: "T", subtitle: "S", icon: "sun.max.fill"
+        )
+        XCTAssertTrue(pastBlock.isPast)
+
+        let futureBlock = TrajectoryBlock(
+            type: .sunlight, startTime: now, endTime: now.addingTimeInterval(3600),
+            energyState: .rising, title: "T", subtitle: "S", icon: "sun.max.fill"
+        )
+        XCTAssertFalse(futureBlock.isPast)
+    }
+
+    // MARK: - TrajectoryService Integration
+
+    func test_trajectoryService_differentChronotypesProduceDifferentTrajectories() {
+        let calendar = Calendar.current
+        let today = Date()
+        let wake = calendar.date(bySettingHour: 7, minute: 0, second: 0, of: today)!
+        let sleep = calendar.date(bySettingHour: 23, minute: 0, second: 0, of: today)!
+        let service = TrajectoryService()
+
+        let lionBlocks = service.generateTrajectory(chronotype: .lion, wakeTime: wake, sleepTime: sleep, dataNightsCount: 14)
+        let wolfBlocks = service.generateTrajectory(chronotype: .wolf, wakeTime: wake, sleepTime: sleep, dataNightsCount: 14)
+
+        // Peak focus times should differ
+        let lionPeakStart = lionBlocks.first { $0.type == .peakFocus }?.startTime
+        let wolfPeakStart = wolfBlocks.first { $0.type == .peakFocus }?.startTime
+        XCTAssertNotNil(lionPeakStart)
+        XCTAssertNotNil(wolfPeakStart)
+        XCTAssertNotEqual(lionPeakStart, wolfPeakStart)
+    }
+
+    func test_trajectoryService_confidenceLevels() {
+        let service = TrajectoryService()
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 0), .low)
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 2), .lowMedium)
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 5), .medium)
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 10), .mediumHigh)
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 18), .high)
+        XCTAssertEqual(service.confidenceLevel(dataNightsCount: 30), .veryHigh)
+    }
 }

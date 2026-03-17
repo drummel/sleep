@@ -39,7 +39,7 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "moon.stars.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
 
                 Spacer()
@@ -51,15 +51,15 @@ struct SettingsView: View {
                     viewModel.retakeQuiz()
                 }
                 .font(.caption)
-                .foregroundStyle(SleepTheme.amber)
+                .foregroundStyle(SleepTheme.accent)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
                 .background(
                     Capsule()
-                        .stroke(SleepTheme.amber, lineWidth: 1)
+                        .stroke(SleepTheme.accent, lineWidth: 1)
                 )
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Picker(selection: $viewModel.goal) {
                 ForEach(UserGoal.allCases, id: \.self) { goal in
@@ -71,11 +71,11 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "target")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
             .tint(.white.opacity(0.6))
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Picker(selection: $viewModel.ageRange) {
                 ForEach(AgeRange.allCases, id: \.self) { range in
@@ -87,11 +87,11 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "person.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
             .tint(.white.opacity(0.6))
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Toggle(isOn: $viewModel.isNightShift) {
                 Label {
@@ -99,11 +99,11 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "moon.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .tint(SleepTheme.amber)
-            .listRowBackground(SleepTheme.cardBackground)
+            .tint(SleepTheme.accent)
+            .listRowBackground(SleepTheme.card)
         } header: {
             Text("Profile")
                 .foregroundStyle(.white.opacity(0.5))
@@ -128,8 +128,8 @@ struct SettingsView: View {
                         .foregroundStyle(.red)
                 }
             }
-            .tint(SleepTheme.amber)
-            .listRowBackground(SleepTheme.cardBackground)
+            .tint(SleepTheme.accent)
+            .listRowBackground(SleepTheme.card)
 
             Toggle(isOn: $viewModel.calendarExportEnabled) {
                 Label {
@@ -137,11 +137,11 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "calendar")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .tint(SleepTheme.amber)
-            .listRowBackground(SleepTheme.cardBackground)
+            .tint(SleepTheme.accent)
+            .listRowBackground(SleepTheme.card)
         } header: {
             Text("Connections")
                 .foregroundStyle(.white.opacity(0.5))
@@ -190,7 +190,7 @@ struct SettingsView: View {
             notificationToggle(
                 isOn: $viewModel.notificationPreferences.weeklySummaryEnabled,
                 icon: "doc.text.fill",
-                iconColor: SleepTheme.amber,
+                iconColor: SleepTheme.accent,
                 title: "Weekly Summary",
                 subtitle: "Your sleep patterns overview"
             )
@@ -221,8 +221,8 @@ struct SettingsView: View {
                     .foregroundStyle(iconColor)
             }
         }
-        .tint(SleepTheme.amber)
-        .listRowBackground(SleepTheme.cardBackground)
+        .tint(SleepTheme.accent)
+        .listRowBackground(SleepTheme.card)
     }
 
     // MARK: - Preferences Section
@@ -240,11 +240,11 @@ struct SettingsView: View {
                     }
                 } icon: {
                     Image(systemName: "flask.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .tint(SleepTheme.amber)
-            .listRowBackground(SleepTheme.cardBackground)
+            .tint(SleepTheme.accent)
+            .listRowBackground(SleepTheme.card)
 
             Picker(selection: $viewModel.caffeineSensitivity) {
                 ForEach(CaffeineSensitivity.allCases, id: \.self) { sensitivity in
@@ -256,11 +256,11 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "bolt.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
             .tint(.white.opacity(0.6))
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Toggle(isOn: $viewModel.use24HourTime) {
                 Label {
@@ -273,11 +273,11 @@ struct SettingsView: View {
                     }
                 } icon: {
                     Image(systemName: "clock.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .tint(SleepTheme.amber)
-            .listRowBackground(SleepTheme.cardBackground)
+            .tint(SleepTheme.accent)
+            .listRowBackground(SleepTheme.card)
         } header: {
             Text("Preferences")
                 .foregroundStyle(.white.opacity(0.5))
@@ -296,10 +296,10 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "square.and.arrow.up.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Button {
                 viewModel.deleteAllData()
@@ -312,7 +312,7 @@ struct SettingsView: View {
                         .foregroundStyle(.red)
                 }
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
         } header: {
             Text("Data")
                 .foregroundStyle(.white.opacity(0.5))
@@ -329,14 +329,14 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "crown.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
                 Spacer()
                 Text(viewModel.subscriptionStatusText)
                     .font(.subheadline)
                     .foregroundStyle(.green)
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Link(destination: URL(string: "https://sleeppath.app/privacy")!) {
                 Label {
@@ -344,10 +344,10 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "hand.raised.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             Link(destination: URL(string: "https://sleeppath.app/terms")!) {
                 Label {
@@ -355,10 +355,10 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "doc.text.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             HStack {
                 Label {
@@ -366,14 +366,14 @@ struct SettingsView: View {
                         .foregroundStyle(.white)
                 } icon: {
                     Image(systemName: "info.circle.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
                 Spacer()
                 Text(viewModel.versionString)
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.4))
             }
-            .listRowBackground(SleepTheme.cardBackground)
+            .listRowBackground(SleepTheme.card)
 
             HStack {
                 Spacer()

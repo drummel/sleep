@@ -30,7 +30,7 @@ struct QuickActionsView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 }
@@ -48,14 +48,14 @@ private struct SunlightButton: View {
                     .fill(
                         isLogged
                             ? Color(red: 60/255, green: 50/255, blue: 15/255)
-                            : SleepTheme.cardBackgroundLight
+                            : SleepTheme.cardLight
                     )
                     .frame(width: 64, height: 64)
                     .overlay(
                         Circle()
                             .strokeBorder(
                                 isLogged
-                                    ? SleepTheme.amber.opacity(0.5)
+                                    ? SleepTheme.accent.opacity(0.5)
                                     : Color.clear,
                                 lineWidth: 1.5
                             )
@@ -65,7 +65,7 @@ private struct SunlightButton: View {
                     ZStack {
                         Image(systemName: "sun.max.fill")
                             .font(.system(size: 24))
-                            .foregroundColor(SleepTheme.amber)
+                            .foregroundColor(SleepTheme.accent)
 
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 14, weight: .bold))
@@ -75,7 +75,7 @@ private struct SunlightButton: View {
                 } else {
                     Image(systemName: "sun.max.fill")
                         .font(.system(size: 24))
-                        .foregroundColor(SleepTheme.amber)
+                        .foregroundColor(SleepTheme.accent)
                 }
             }
             .scaleEffect(isPressed ? 0.88 : 1.0)
@@ -114,7 +114,7 @@ private struct CoffeeButton: View {
                     .fill(
                         count > 0
                             ? Color(red: 40/255, green: 30/255, blue: 15/255)
-                            : SleepTheme.cardBackgroundLight
+                            : SleepTheme.cardLight
                     )
                     .frame(width: 64, height: 64)
                     .overlay(
@@ -182,7 +182,7 @@ private struct ShareButton: View {
     var body: some View {
         VStack(spacing: 8) {
             Circle()
-                .fill(SleepTheme.cardBackgroundLight)
+                .fill(SleepTheme.cardLight)
                 .frame(width: 64, height: 64)
                 .overlay(
                     Image(systemName: "square.and.arrow.up")

@@ -67,6 +67,7 @@ final class OnboardingViewModel {
 
     /// The question currently being displayed.
     var currentQuestion: QuizQuestion {
+        guard !questions.isEmpty else { return QuizQuestion.allQuestions[0] }
         let index = min(currentQuestionIndex, questions.count - 1)
         return questions[index]
     }

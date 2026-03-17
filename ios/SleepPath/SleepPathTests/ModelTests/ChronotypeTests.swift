@@ -89,14 +89,14 @@ final class ChronotypeTests: XCTestCase {
 
     func test_description_allChronotypes_areNonEmpty() {
         for chronotype in Chronotype.allCases {
-            XCTAssertFalse(chronotype.description.isEmpty, "\(chronotype) description should not be empty")
+            XCTAssertFalse(chronotype.detailedDescription.isEmpty, "\(chronotype) description should not be empty")
         }
     }
 
     func test_description_allChronotypes_haveMeaningfulLength() {
         for chronotype in Chronotype.allCases {
             XCTAssertGreaterThan(
-                chronotype.description.count, 50,
+                chronotype.detailedDescription.count, 50,
                 "\(chronotype) description should be at least 50 characters"
             )
         }

@@ -33,7 +33,7 @@ enum Chronotype: String, Codable, CaseIterable {
         }
     }
 
-    var description: String {
+    var detailedDescription: String {
         switch self {
         case .lion:
             "Lions are the early risers who hit peak performance before most people finish breakfast. "

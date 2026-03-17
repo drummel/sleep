@@ -231,10 +231,10 @@ final class SettingsViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.showDeleteConfirmation)
     }
 
-    func test_confirmDeleteAllData_resetsChronotypeToBear() {
-        viewModel.chronotype = .wolf
+    func test_confirmDeleteAllData_resetsChronotypeToWolf() {
+        viewModel.chronotype = .lion
         viewModel.confirmDeleteAllData()
-        XCTAssertEqual(viewModel.chronotype, .bear)
+        XCTAssertEqual(viewModel.chronotype, .wolf)
     }
 
     func test_confirmDeleteAllData_resetsGoalToFocus() {
@@ -277,6 +277,12 @@ final class SettingsViewModelTests: XCTestCase {
         viewModel.calendarExportEnabled = true
         viewModel.confirmDeleteAllData()
         XCTAssertFalse(viewModel.calendarExportEnabled)
+    }
+
+    func test_confirmDeleteAllData_resetsIsProSubscriber() {
+        viewModel.isProSubscriber = true
+        viewModel.confirmDeleteAllData()
+        XCTAssertFalse(viewModel.isProSubscriber)
     }
 
     func test_confirmDeleteAllData_resetsNotificationPreferences() {

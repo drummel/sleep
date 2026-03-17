@@ -93,27 +93,27 @@ final class EnergyStateTests: XCTestCase {
 
     func test_description_allStates_areNonEmpty() {
         for state in EnergyState.allCases {
-            XCTAssertFalse(state.description.isEmpty, "\(state) description should not be empty")
+            XCTAssertFalse(state.detailedDescription.isEmpty, "\(state) description should not be empty")
         }
     }
 
     func test_description_allStates_haveMeaningfulLength() {
         for state in EnergyState.allCases {
             XCTAssertGreaterThan(
-                state.description.count, 20,
+                state.detailedDescription.count, 20,
                 "\(state) description should be at least 20 characters"
             )
         }
     }
 
     func test_description_peak_mentionsFocusOrClarity() {
-        let description = EnergyState.peak.description.lowercased()
+        let description = EnergyState.peak.detailedDescription.lowercased()
         let mentionsRelevantConcept = description.contains("focus") || description.contains("clarity") || description.contains("peak")
         XCTAssertTrue(mentionsRelevantConcept, "Peak description should mention focus, clarity, or peak")
     }
 
     func test_description_sleeping_mentionsRest() {
-        let description = EnergyState.sleeping.description.lowercased()
+        let description = EnergyState.sleeping.detailedDescription.lowercased()
         let mentionsRest = description.contains("rest") || description.contains("repair") || description.contains("recharge")
         XCTAssertTrue(mentionsRest, "Sleeping description should mention rest, repair, or recharge")
     }

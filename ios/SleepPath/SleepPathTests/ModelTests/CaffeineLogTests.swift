@@ -23,6 +23,11 @@ final class CaffeineLogTests: XCTestCase {
         XCTAssertEqual(log.source, "Espresso")
     }
 
+    func test_init_zeroAmount() {
+        let log = CaffeineLog(timestamp: Date(), amountMg: 0)
+        XCTAssertEqual(log.amountMg, 0)
+    }
+
     // MARK: - Identifiable
 
     func test_identifiable_uniqueIds() {
@@ -31,57 +36,93 @@ final class CaffeineLogTests: XCTestCase {
         XCTAssertNotEqual(log1.id, log2.id)
     }
 
-    // MARK: - Hours Since Intake
+    // MARK: - Hours Since Intake (deterministic with referenceDate)
 
-    func test_hoursSinceIntake_recentTimestamp() {
-        let oneHourAgo = Date.now.addingTimeInterval(-3600)
-        let log = CaffeineLog(timestamp: oneHourAgo)
-        XCTAssertEqual(log.hoursSinceIntake, 1.0, accuracy: 0.05)
+    func test_hoursSinceIntake_oneHour() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = Date(timeIntervalSince1970: 4600) // 1 hour later
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.hoursSinceIntake(referenceDate: reference), 1.0, accuracy: 0.01)
     }
 
-    func test_hoursSinceIntake_fiveHoursAgo() {
-        let fiveHoursAgo = Date.now.addingTimeInterval(-5 * 3600)
-        let log = CaffeineLog(timestamp: fiveHoursAgo)
-        XCTAssertEqual(log.hoursSinceIntake, 5.0, accuracy: 0.05)
+    func test_hoursSinceIntake_fiveHours() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = Date(timeIntervalSince1970: 19000) // 5 hours later
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.hoursSinceIntake(referenceDate: reference), 5.0, accuracy: 0.01)
     }
 
-    // MARK: - Estimated Caffeine Remaining
-
-    func test_estimatedCaffeineRemaining_atIntakeTime() {
-        let log = CaffeineLog(timestamp: Date.now)
-        XCTAssertEqual(log.estimatedCaffeineRemainingPercent, 100.0, accuracy: 1.0)
+    func test_hoursSinceIntake_zeroWhenSameTime() {
+        let time = Date(timeIntervalSince1970: 1000)
+        let log = CaffeineLog(timestamp: time)
+        XCTAssertEqual(log.hoursSinceIntake(referenceDate: time), 0.0, accuracy: 0.001)
     }
 
-    func test_estimatedCaffeineRemaining_afterOneHalfLife() {
-        let fiveHoursAgo = Date.now.addingTimeInterval(-5 * 3600)
-        let log = CaffeineLog(timestamp: fiveHoursAgo)
-        // After 1 half-life (5h), should be ~50%
-        XCTAssertEqual(log.estimatedCaffeineRemainingPercent, 50.0, accuracy: 2.0)
+    func test_hoursSinceIntake_negativeForFutureTimestamp() {
+        let intake = Date(timeIntervalSince1970: 10000)
+        let reference = Date(timeIntervalSince1970: 1000) // before intake
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertLessThan(log.hoursSinceIntake(referenceDate: reference), 0)
     }
 
-    func test_estimatedCaffeineRemaining_afterTwoHalfLives() {
-        let tenHoursAgo = Date.now.addingTimeInterval(-10 * 3600)
-        let log = CaffeineLog(timestamp: tenHoursAgo)
-        // After 2 half-lives (10h), should be ~25%
-        XCTAssertEqual(log.estimatedCaffeineRemainingPercent, 25.0, accuracy: 2.0)
+    // MARK: - Estimated Caffeine Remaining (deterministic)
+
+    func test_caffeineRemaining_atIntakeTime_is100() {
+        let time = Date(timeIntervalSince1970: 1000)
+        let log = CaffeineLog(timestamp: time)
+        XCTAssertEqual(log.estimatedCaffeineRemainingPercent(referenceDate: time), 100.0, accuracy: 0.01)
     }
 
-    func test_estimatedCaffeineRemaining_futureTimestampReturnsFull() {
-        let futureTimestamp = Date.now.addingTimeInterval(3600) // 1 hour in future
-        let log = CaffeineLog(timestamp: futureTimestamp)
-        // Guard catches negative hours, returns 100
-        XCTAssertEqual(log.estimatedCaffeineRemainingPercent, 100.0, accuracy: 0.01)
+    func test_caffeineRemaining_afterOneHalfLife_is50() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = intake.addingTimeInterval(5 * 3600)
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.estimatedCaffeineRemainingPercent(referenceDate: reference), 50.0, accuracy: 0.01)
     }
 
-    func test_estimatedCaffeineRemaining_decreasesOverTime() {
-        let recent = CaffeineLog(timestamp: Date.now.addingTimeInterval(-1 * 3600))
-        let older = CaffeineLog(timestamp: Date.now.addingTimeInterval(-5 * 3600))
-        XCTAssertGreaterThan(recent.estimatedCaffeineRemainingPercent,
-                             older.estimatedCaffeineRemainingPercent)
+    func test_caffeineRemaining_afterTwoHalfLives_is25() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = intake.addingTimeInterval(10 * 3600)
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.estimatedCaffeineRemainingPercent(referenceDate: reference), 25.0, accuracy: 0.01)
     }
 
-    func test_estimatedCaffeineRemaining_neverNegative() {
-        let veryOld = CaffeineLog(timestamp: Date.now.addingTimeInterval(-100 * 3600))
-        XCTAssertGreaterThanOrEqual(veryOld.estimatedCaffeineRemainingPercent, 0)
+    func test_caffeineRemaining_afterThreeHalfLives_is12point5() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = intake.addingTimeInterval(15 * 3600)
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.estimatedCaffeineRemainingPercent(referenceDate: reference), 12.5, accuracy: 0.01)
+    }
+
+    func test_caffeineRemaining_futureTimestamp_returns100() {
+        let intake = Date(timeIntervalSince1970: 10000)
+        let reference = Date(timeIntervalSince1970: 1000)
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertEqual(log.estimatedCaffeineRemainingPercent(referenceDate: reference), 100.0, accuracy: 0.01)
+    }
+
+    func test_caffeineRemaining_decreasesOverTime() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let log = CaffeineLog(timestamp: intake)
+        let early = log.estimatedCaffeineRemainingPercent(referenceDate: intake.addingTimeInterval(1 * 3600))
+        let later = log.estimatedCaffeineRemainingPercent(referenceDate: intake.addingTimeInterval(5 * 3600))
+        XCTAssertGreaterThan(early, later)
+    }
+
+    func test_caffeineRemaining_neverNegative() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let reference = intake.addingTimeInterval(100 * 3600)
+        let log = CaffeineLog(timestamp: intake)
+        XCTAssertGreaterThanOrEqual(log.estimatedCaffeineRemainingPercent(referenceDate: reference), 0)
+    }
+
+    func test_caffeineRemaining_alwaysLessThanOrEqual100() {
+        let intake = Date(timeIntervalSince1970: 1000)
+        let log = CaffeineLog(timestamp: intake)
+        for hours in stride(from: 0.0, through: 48.0, by: 1.0) {
+            let ref = intake.addingTimeInterval(hours * 3600)
+            let remaining = log.estimatedCaffeineRemainingPercent(referenceDate: ref)
+            XCTAssertLessThanOrEqual(remaining, 100.0)
+        }
     }
 }

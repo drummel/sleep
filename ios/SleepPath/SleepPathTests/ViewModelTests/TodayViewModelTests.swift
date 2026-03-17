@@ -188,8 +188,68 @@ final class TodayViewModelTests: XCTestCase {
 
     func test_refreshEnergyState_updatesState() {
         viewModel.loadToday()
-        // Should not crash and should set a valid energy state
         viewModel.refreshEnergyState()
         XCTAssertTrue(EnergyState.allCases.contains(viewModel.currentEnergyState))
+    }
+
+    // MARK: - Caffeine Cutoff Text Edge Cases
+
+    func test_caffeineCutoffText_pastCutoff_returnsPastCutoff() {
+        viewModel.caffeineCutoffCountdown = 0
+        XCTAssertEqual(viewModel.caffeineCutoffText, "Past cutoff")
+    }
+
+    func test_caffeineCutoffText_negativeCountdown_returnsPastCutoff() {
+        viewModel.caffeineCutoffCountdown = -100
+        XCTAssertEqual(viewModel.caffeineCutoffText, "Past cutoff")
+    }
+
+    func test_caffeineCutoffText_minutesOnly() {
+        viewModel.caffeineCutoffCountdown = 45 * 60 // 45 minutes
+        XCTAssertEqual(viewModel.caffeineCutoffText, "45m until cutoff")
+    }
+
+    func test_caffeineCutoffText_hoursAndMinutes() {
+        viewModel.caffeineCutoffCountdown = 2 * 3600 + 15 * 60 // 2h 15m
+        XCTAssertEqual(viewModel.caffeineCutoffText, "2h 15m until cutoff")
+    }
+
+    // MARK: - Formatted Time Until Change Edge Cases
+
+    func test_formattedTimeUntilChange_zeroReturnsNow() {
+        viewModel.timeUntilNextChange = 0
+        XCTAssertEqual(viewModel.formattedTimeUntilChange, "Now")
+    }
+
+    func test_formattedTimeUntilChange_negativeReturnsNow() {
+        viewModel.timeUntilNextChange = -100
+        XCTAssertEqual(viewModel.formattedTimeUntilChange, "Now")
+    }
+
+    func test_formattedTimeUntilChange_minutesOnly() {
+        viewModel.timeUntilNextChange = 30 * 60
+        XCTAssertEqual(viewModel.formattedTimeUntilChange, "30m")
+    }
+
+    func test_formattedTimeUntilChange_hoursAndMinutes() {
+        viewModel.timeUntilNextChange = 3600 + 45 * 60
+        XCTAssertEqual(viewModel.formattedTimeUntilChange, "1h 45m")
+    }
+
+    // MARK: - Load Today Idempotency
+
+    func test_loadToday_calledTwice_doesNotDuplicate() {
+        viewModel.loadToday()
+        let firstCount = viewModel.trajectoryBlocks.count
+        viewModel.loadToday()
+        XCTAssertEqual(viewModel.trajectoryBlocks.count, firstCount)
+    }
+
+    // MARK: - Log Caffeine Before Load
+
+    func test_logCaffeine_beforeLoad_incrementsFromZero() {
+        XCTAssertEqual(viewModel.todayCaffeineCount, 0)
+        viewModel.logCaffeine()
+        XCTAssertEqual(viewModel.todayCaffeineCount, 1)
     }
 }

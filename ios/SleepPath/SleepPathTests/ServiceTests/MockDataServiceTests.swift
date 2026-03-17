@@ -270,7 +270,7 @@ final class MockDataServiceTests: XCTestCase {
     // MARK: - Caffeine Impact
 
     func test_caffeineImpactMinutes_isNonNegative() {
-        XCTAssertGreaterThanOrEqual(mockData.caffeinImpactMinutes, 0)
+        XCTAssertGreaterThanOrEqual(mockData.caffeineImpactMinutes, 0)
     }
 
     // MARK: - Deterministic Data
@@ -280,5 +280,43 @@ final class MockDataServiceTests: XCTestCase {
         // sleep logs count should always be 30
         XCTAssertEqual(mockData.sleepLogs.count, 30)
         XCTAssertEqual(mockData.userProfile.name, "Alex")
+    }
+
+    // MARK: - Average Sleep Onset & Wake Time
+
+    func test_averageSleepOnset_isReasonableTime() {
+        let onset = mockData.averageSleepOnset
+        XCTAssertNotNil(onset)
+    }
+
+    func test_averageWakeTime_isReasonableTime() {
+        let wakeTime = mockData.averageWakeTime
+        XCTAssertNotNil(wakeTime)
+    }
+
+    // MARK: - Today Trajectory
+
+    func test_todayTrajectory_hasBlocks() {
+        let trajectory = mockData.todayTrajectory
+        XCTAssertFalse(trajectory.blocks.isEmpty)
+    }
+
+    func test_todayTrajectory_isForToday() {
+        let trajectory = mockData.todayTrajectory
+        XCTAssertTrue(Calendar.current.isDateInToday(trajectory.date))
+    }
+
+    func test_todayTrajectory_hasChronotype() {
+        let trajectory = mockData.todayTrajectory
+        XCTAssertEqual(trajectory.chronotype, .wolf)
+    }
+
+    // MARK: - Sleep Log Relationships
+
+    func test_sleepLogs_totalSleepNeverExceedsTimeInBed() {
+        for log in mockData.sleepLogs {
+            XCTAssertLessThanOrEqual(log.totalSleepMinutes, log.timeInBedMinutes,
+                                     "totalSleepMinutes should not exceed timeInBedMinutes for log on \(log.dateString)")
+        }
     }
 }

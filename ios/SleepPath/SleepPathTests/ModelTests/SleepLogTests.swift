@@ -173,4 +173,47 @@ final class SleepLogTests: XCTestCase {
         let weekendLog = makeSleepLog(isWeekday: false)
         XCTAssertFalse(weekendLog.isWeekday)
     }
+
+    // MARK: - Edge Cases
+
+    func test_sleepEfficiency_clampedTo100WhenSleepExceedsTimeInBed() {
+        let bedtime = Date()
+        let wakeTime = bedtime.addingTimeInterval(4 * 3600) // 240 min in bed
+        let log = SleepLog(
+            bedtime: bedtime,
+            wakeTime: wakeTime,
+            deepSleepMinutes: 100,
+            remSleepMinutes: 100,
+            coreSleepMinutes: 100,
+            awakeMinutes: 0,
+            isWeekday: true
+        )
+        // totalSleep = 300 > timeInBed = 240, efficiency should be clamped to 100
+        XCTAssertLessThanOrEqual(log.sleepEfficiency, 100.0)
+    }
+
+    func test_timeInBedMinutes_bedtimeAfterWakeTimeReturnsZero() {
+        let bedtime = Date()
+        let wakeTime = bedtime.addingTimeInterval(-3600) // wake before bed (bad data)
+        let log = SleepLog(
+            bedtime: bedtime,
+            wakeTime: wakeTime,
+            deepSleepMinutes: 90,
+            remSleepMinutes: 90,
+            coreSleepMinutes: 90,
+            awakeMinutes: 10,
+            isWeekday: true
+        )
+        XCTAssertGreaterThanOrEqual(log.timeInBedMinutes, 0, "Should not return negative")
+    }
+
+    func test_totalSleepMinutes_allZeros() {
+        let log = makeSleepLog(deepSleepMinutes: 0, remSleepMinutes: 0, coreSleepMinutes: 0)
+        XCTAssertEqual(log.totalSleepMinutes, 0)
+    }
+
+    func test_durationMinutes_allZeros() {
+        let log = makeSleepLog(deepSleepMinutes: 0, remSleepMinutes: 0, coreSleepMinutes: 0, awakeMinutes: 0)
+        XCTAssertEqual(log.durationMinutes, 0)
+    }
 }

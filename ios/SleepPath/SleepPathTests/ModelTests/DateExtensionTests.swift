@@ -228,9 +228,34 @@ final class DateExtensionTests: XCTestCase {
 
     // MARK: - isWeekend
 
-    func test_isWeekend_returnsBoolean() {
-        // Just verify it doesn't crash and returns a boolean
-        let _ = Date().isWeekend
+    func test_isWeekend_saturdayReturnsTrue() {
+        var components = DateComponents()
+        components.year = 2026
+        components.month = 3
+        components.day = 14 // Saturday
+        components.hour = 12
+        let saturday = Calendar.current.date(from: components)!
+        XCTAssertTrue(saturday.isWeekend)
+    }
+
+    func test_isWeekend_sundayReturnsTrue() {
+        var components = DateComponents()
+        components.year = 2026
+        components.month = 3
+        components.day = 15 // Sunday
+        components.hour = 12
+        let sunday = Calendar.current.date(from: components)!
+        XCTAssertTrue(sunday.isWeekend)
+    }
+
+    func test_isWeekend_mondayReturnsFalse() {
+        var components = DateComponents()
+        components.year = 2026
+        components.month = 3
+        components.day = 16 // Monday
+        components.hour = 12
+        let monday = Calendar.current.date(from: components)!
+        XCTAssertFalse(monday.isWeekend)
     }
 
     // MARK: - hour and minute Properties

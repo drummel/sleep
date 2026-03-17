@@ -11,9 +11,4 @@ struct SunlightLog: Identifiable, Sendable {
         self.durationMinutes = durationMinutes
         self.withinRecommendedWindow = withinRecommendedWindow
     }
-
-    /// Whether the sunlight exposure was within the ideal 30-minute post-wake window.
-    var isWithinIdealWindow: Bool {
-        withinRecommendedWindow
-    }
 }

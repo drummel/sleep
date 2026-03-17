@@ -18,6 +18,12 @@ final class SunlightLogTests: XCTestCase {
         XCTAssertFalse(log.withinRecommendedWindow)
     }
 
+    func test_init_storesExactDate() {
+        let specificDate = Date(timeIntervalSince1970: 1700000000)
+        let log = SunlightLog(date: specificDate, durationMinutes: 20)
+        XCTAssertEqual(log.date.timeIntervalSince1970, 1700000000, accuracy: 0.001)
+    }
+
     // MARK: - Identifiable
 
     func test_identifiable_uniqueIds() {
@@ -26,23 +32,42 @@ final class SunlightLogTests: XCTestCase {
         XCTAssertNotEqual(log1.id, log2.id)
     }
 
-    // MARK: - isWithinIdealWindow
+    // MARK: - withinRecommendedWindow
 
-    func test_isWithinIdealWindow_returnsTrueWhenRecommended() {
+    func test_withinRecommendedWindow_trueWhenSetToTrue() {
         let log = SunlightLog(date: Date(), durationMinutes: 15, withinRecommendedWindow: true)
-        XCTAssertTrue(log.isWithinIdealWindow)
+        XCTAssertTrue(log.withinRecommendedWindow)
     }
 
-    func test_isWithinIdealWindow_returnsFalseWhenNotRecommended() {
+    func test_withinRecommendedWindow_falseWhenSetToFalse() {
         let log = SunlightLog(date: Date(), durationMinutes: 15, withinRecommendedWindow: false)
-        XCTAssertFalse(log.isWithinIdealWindow)
+        XCTAssertFalse(log.withinRecommendedWindow)
     }
 
-    func test_isWithinIdealWindow_matchesWithinRecommendedWindow() {
-        let logTrue = SunlightLog(date: Date(), durationMinutes: 10, withinRecommendedWindow: true)
-        XCTAssertEqual(logTrue.isWithinIdealWindow, logTrue.withinRecommendedWindow)
+    // MARK: - Edge Cases
 
-        let logFalse = SunlightLog(date: Date(), durationMinutes: 10, withinRecommendedWindow: false)
-        XCTAssertEqual(logFalse.isWithinIdealWindow, logFalse.withinRecommendedWindow)
+    func test_zeroDurationMinutes() {
+        let log = SunlightLog(date: Date(), durationMinutes: 0)
+        XCTAssertEqual(log.durationMinutes, 0)
+    }
+
+    func test_negativeDurationMinutes_accepted() {
+        let log = SunlightLog(date: Date(), durationMinutes: -5)
+        XCTAssertEqual(log.durationMinutes, -5)
+    }
+
+    func test_largeDurationMinutes() {
+        let log = SunlightLog(date: Date(), durationMinutes: 1440) // 24 hours
+        XCTAssertEqual(log.durationMinutes, 1440)
+    }
+
+    func test_distantPastDate() {
+        let log = SunlightLog(date: .distantPast, durationMinutes: 10)
+        XCTAssertEqual(log.date, .distantPast)
+    }
+
+    func test_distantFutureDate() {
+        let log = SunlightLog(date: .distantFuture, durationMinutes: 10)
+        XCTAssertEqual(log.date, .distantFuture)
     }
 }

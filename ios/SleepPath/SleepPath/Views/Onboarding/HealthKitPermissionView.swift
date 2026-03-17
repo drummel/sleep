@@ -62,7 +62,7 @@ struct HealthKitPermissionView: View {
                     RadialGradient(
                         colors: [
                             Color.red.opacity(0.08),
-                            SleepTheme.amber.opacity(0.04),
+                            SleepTheme.accent.opacity(0.04),
                             Color.clear,
                         ],
                         center: .center,
@@ -133,7 +133,7 @@ struct HealthKitPermissionView: View {
             .padding(20)
 
             Divider()
-                .overlay(SleepTheme.cardBackgroundLight)
+                .overlay(SleepTheme.cardLight)
 
             // What we never do
             VStack(alignment: .leading, spacing: 14) {
@@ -162,7 +162,7 @@ struct HealthKitPermissionView: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 18)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 
@@ -170,7 +170,7 @@ struct HealthKitPermissionView: View {
         HStack(spacing: 8) {
             Image(systemName: "lock.shield.fill")
                 .font(.system(size: 14, weight: .medium))
-                .foregroundColor(SleepTheme.amber)
+                .foregroundColor(SleepTheme.accent)
 
             Text("All your data stays on this device.")
                 .font(.system(size: 13, weight: .medium))
@@ -191,7 +191,7 @@ struct HealthKitPermissionView: View {
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
-                .background(SleepTheme.amberGradient, in: RoundedRectangle(cornerRadius: 16))
+                .background(SleepTheme.accentGradient, in: RoundedRectangle(cornerRadius: 16))
             }
             .buttonStyle(.plain)
 

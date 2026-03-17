@@ -1,41 +1,63 @@
 import Foundation
 
 extension Date {
+    // MARK: - Cached Formatters
+
+    private static let shortTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+
+    private static let time24Formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+
+    private static let shortDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d"
+        return formatter
+    }()
+
+    private static let isoDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+
+    private static let fullDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "EEEE, MMMM d"
+        return formatter
+    }()
+
     // MARK: - Time Formatting
 
     /// Format as "7:30 AM"
     var shortTimeString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a"
-        return formatter.string(from: self)
+        Date.shortTimeFormatter.string(from: self)
     }
 
     /// Format as "07:30"
     var time24String: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter.string(from: self)
+        Date.time24Formatter.string(from: self)
     }
 
     /// Format as "Mar 17"
     var shortDateString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d"
-        return formatter.string(from: self)
+        Date.shortDateFormatter.string(from: self)
     }
 
     /// Format as "2026-03-17"
     var isoDateString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: self)
+        Date.isoDateFormatter.string(from: self)
     }
 
     /// Format as "Monday, March 17"
     var fullDateString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMMM d"
-        return formatter.string(from: self)
+        Date.fullDateFormatter.string(from: self)
     }
 
     // MARK: - Date Construction

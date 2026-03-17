@@ -32,7 +32,7 @@ struct TrajectoryTimelineView: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 }
@@ -46,7 +46,7 @@ private struct TrajectoryTimelineRow: View {
 
     private var dotColor: Color {
         if block.isActive {
-            return SleepTheme.amber
+            return SleepTheme.accent
         } else if block.isPast {
             return SleepTheme.textTertiary
         }
@@ -65,11 +65,11 @@ private struct TrajectoryTimelineRow: View {
                 ZStack {
                     if block.isActive {
                         Circle()
-                            .fill(SleepTheme.amber.opacity(0.3))
+                            .fill(SleepTheme.accent.opacity(0.3))
                             .frame(width: 20, height: 20)
 
                         Circle()
-                            .fill(SleepTheme.amber)
+                            .fill(SleepTheme.accent)
                             .frame(width: 10, height: 10)
                     } else if block.isPast {
                         Circle()
@@ -88,7 +88,7 @@ private struct TrajectoryTimelineRow: View {
                     Rectangle()
                         .fill(
                             block.isActive
-                                ? SleepTheme.amber.opacity(0.4)
+                                ? SleepTheme.accent.opacity(0.4)
                                 : SleepTheme.textTertiary.opacity(0.3)
                         )
                         .frame(width: 1.5)
@@ -101,7 +101,7 @@ private struct TrajectoryTimelineRow: View {
                 HStack(spacing: 8) {
                     Image(systemName: block.icon)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(block.isActive ? SleepTheme.amber : iconColor)
+                        .foregroundColor(block.isActive ? SleepTheme.accent : iconColor)
                         .frame(width: 20)
 
                     Text(block.title)
@@ -119,7 +119,7 @@ private struct TrajectoryTimelineRow: View {
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(
-                                Capsule().fill(SleepTheme.amber)
+                                Capsule().fill(SleepTheme.accent)
                             )
                     }
 
@@ -147,7 +147,7 @@ private struct TrajectoryTimelineRow: View {
         .background(
             block.isActive
                 ? RoundedRectangle(cornerRadius: 12)
-                    .fill(SleepTheme.amber.opacity(0.06))
+                    .fill(SleepTheme.accent.opacity(0.06))
                     .padding(.horizontal, -8)
                     .padding(.vertical, -4)
                 : nil

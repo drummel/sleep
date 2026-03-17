@@ -160,7 +160,7 @@ final class PatternsViewModel {
         averageSleepDuration = mockData.averageSleepDuration
         sleepConsistencyScore = mockData.sleepConsistencyScore
         socialJetlagMinutes = mockData.socialJetlagMinutes
-        caffeineImpactMinutes = mockData.caffeinImpactMinutes
+        caffeineImpactMinutes = mockData.caffeineImpactMinutes
 
         // Confidence based on data volume.
         computeChronotypeConfidence()

@@ -158,7 +158,7 @@ final class MockDataService {
     }
 
     /// Average sleep onset delay on high-caffeine days vs. normal days, in minutes.
-    var caffeinImpactMinutes: Int {
+    var caffeineImpactMinutes: Int {
         var caffeineByDay: [String: Int] = [:]
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -193,13 +193,13 @@ final class MockDataService {
 
     // MARK: - Data Generation
 
-    private mutating func generateAllData() {
+    private func generateAllData() {
         generatedSleepLogs = generateSleepLogs()
         generatedCaffeineLogs = generateCaffeineLogs()
         generatedSunlightLogs = generateSunlightLogs()
     }
 
-    private mutating func generateSleepLogs() -> [SleepLog] {
+    private func generateSleepLogs() -> [SleepLog] {
         var logs: [SleepLog] = []
         let today = Date()
 
@@ -243,7 +243,7 @@ final class MockDataService {
         return logs
     }
 
-    private mutating func generateCaffeineLogs() -> [CaffeineLog] {
+    private func generateCaffeineLogs() -> [CaffeineLog] {
         var logs: [CaffeineLog] = []
         let today = Date()
 
@@ -285,7 +285,7 @@ final class MockDataService {
         return logs
     }
 
-    private mutating func generateSunlightLogs() -> [SunlightLog] {
+    private func generateSunlightLogs() -> [SunlightLog] {
         var logs: [SunlightLog] = []
         let today = Date()
 

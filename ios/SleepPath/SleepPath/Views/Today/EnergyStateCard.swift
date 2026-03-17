@@ -75,7 +75,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 40/255, green: 35/255, blue: 15/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -84,7 +84,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 35/255, green: 30/255, blue: 20/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -93,7 +93,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 25/255, green: 28/255, blue: 40/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -102,7 +102,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 20/255, green: 35/255, blue: 30/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -111,7 +111,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 25/255, green: 20/255, blue: 40/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -120,7 +120,7 @@ struct EnergyStateCard: View {
             LinearGradient(
                 colors: [
                     Color(red: 15/255, green: 15/255, blue: 35/255),
-                    SleepTheme.cardBackground,
+                    SleepTheme.card,
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -130,7 +130,7 @@ struct EnergyStateCard: View {
 
     private var iconColor: Color {
         switch energyState {
-        case .peak: SleepTheme.amber
+        case .peak: SleepTheme.accent
         case .rising: Color(red: 255/255, green: 200/255, blue: 100/255)
         case .dip: Color(red: 140/255, green: 160/255, blue: 200/255)
         case .recovery: Color(red: 100/255, green: 210/255, blue: 160/255)

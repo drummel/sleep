@@ -102,7 +102,7 @@ struct PatternsView: View {
                     Text("\(Int(viewModel.chronotypeConfidence * 100))%")
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                 }
 
                 GeometryReader { geometry in
@@ -114,7 +114,7 @@ struct PatternsView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(
                                 LinearGradient(
-                                    colors: [SleepTheme.amber, SleepTheme.amber.opacity(0.7)],
+                                    colors: [SleepTheme.accent, SleepTheme.accent.opacity(0.7)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -128,7 +128,7 @@ struct PatternsView: View {
             if viewModel.showChronotypeRecalibration, let suggested = viewModel.suggestedChronotype {
                 HStack(spacing: 8) {
                     Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundStyle(SleepTheme.amber)
+                        .foregroundStyle(SleepTheme.accent)
                         .font(.caption)
 
                     Text("Your patterns suggest you might be a \(suggested.displayName). Consider recalibrating.")
@@ -145,7 +145,7 @@ struct PatternsView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 
@@ -155,7 +155,7 @@ struct PatternsView: View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
                 Image(systemName: "text.document.fill")
-                    .foregroundStyle(SleepTheme.amber)
+                    .foregroundStyle(SleepTheme.accent)
                 Text("Weekly Summary")
                     .font(.headline)
                     .foregroundStyle(.white)
@@ -173,7 +173,7 @@ struct PatternsView: View {
         .padding(16)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 }

@@ -192,11 +192,11 @@ private struct ProgressBarView: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(SleepTheme.cardBackground)
+                    .fill(SleepTheme.card)
                     .frame(height: 6)
 
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(SleepTheme.amberGradient)
+                    .fill(SleepTheme.accentGradient)
                     .frame(width: geometry.size.width * progress, height: 6)
                     .animation(.easeInOut(duration: 0.35), value: progress)
             }
@@ -231,12 +231,12 @@ private struct OptionCard: View {
             .padding(.vertical, 18)
             .background(
                 RoundedRectangle(cornerRadius: 14)
-                    .fill(isSelected ? SleepTheme.amber : SleepTheme.cardBackground)
+                    .fill(isSelected ? SleepTheme.accent : SleepTheme.card)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 14)
                     .stroke(
-                        isSelected ? Color.clear : SleepTheme.cardBackgroundLight,
+                        isSelected ? Color.clear : SleepTheme.cardLight,
                         lineWidth: 1
                     )
             )

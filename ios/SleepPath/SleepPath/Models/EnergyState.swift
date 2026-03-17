@@ -30,7 +30,7 @@ enum EnergyState: String, Codable, CaseIterable {
         }
     }
 
-    var description: String {
+    var detailedDescription: String {
         switch self {
         case .peak:
             "You're in your peak energy window. Mental clarity and focus are at their highest."

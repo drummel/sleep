@@ -157,7 +157,7 @@ final class SettingsViewModel {
         showDeleteConfirmation = false
         // In a real app this would clear SwiftData and UserDefaults.
         // For the prototype we just reset to defaults.
-        chronotype = .bear
+        chronotype = .wolf
         goal = .focus
         ageRange = .twentySix_35
         isNightShift = false
@@ -166,5 +166,6 @@ final class SettingsViewModel {
         healthKitConnected = false
         calendarExportEnabled = false
         notificationPreferences = NotificationPreferences()
+        isProSubscriber = false
     }
 }

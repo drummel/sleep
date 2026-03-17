@@ -153,12 +153,18 @@ final class NotificationService {
             ))
         }
 
-        // Add weekly summary notification (Sunday at 9 AM).
+        // Add weekly summary notification (next Sunday at 9 AM, or today if Sunday).
         if preferences.weeklySummaryEnabled {
             let calendar = Calendar.current
             let today = Date()
-            var components = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today)
-            components.weekday = 1  // Sunday
+            let weekday = calendar.component(.weekday, from: today)
+            // weekday 1 = Sunday. If today is Sunday, offset is 0; otherwise advance to next Sunday.
+            let daysUntilSunday = (8 - weekday) % 7
+            guard let nextSunday = calendar.date(byAdding: .day, value: daysUntilSunday, to: today) else {
+                scheduledNotifications = notifications.sorted { $0.scheduledTime < $1.scheduledTime }
+                return
+            }
+            var components = calendar.dateComponents([.year, .month, .day], from: nextSunday)
             components.hour = 9
             components.minute = 0
 
@@ -224,14 +230,19 @@ final class NotificationService {
         }
     }
 
+    /// Cached time formatter for notification content.
+    private static let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+
     /// Generates notification title and body text for a given type and block.
     private func notificationContent(
         for type: NotificationType,
         block: TrajectoryBlock
     ) -> (title: String, body: String) {
-        let timeFormatter = DateFormatter()
-        timeFormatter.dateFormat = "h:mm a"
-        let timeString = timeFormatter.string(from: block.startTime)
+        let timeString = Self.timeFormatter.string(from: block.startTime)
 
         switch type {
         case .sunlight:

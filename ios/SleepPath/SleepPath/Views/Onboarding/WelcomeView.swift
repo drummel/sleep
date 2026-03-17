@@ -58,7 +58,7 @@ struct WelcomeView: View {
                 .fill(
                     RadialGradient(
                         colors: [
-                            SleepTheme.amber.opacity(0.15),
+                            SleepTheme.accent.opacity(0.15),
                             Color.clear,
                         ],
                         center: .center,
@@ -70,7 +70,7 @@ struct WelcomeView: View {
 
             Image(systemName: "moon.stars.fill")
                 .font(.system(size: 72, weight: .light))
-                .foregroundStyle(SleepTheme.amberGradient)
+                .foregroundStyle(SleepTheme.accentGradient)
                 .symbolEffect(.breathe.pulse, options: .repeating, value: logoAppeared)
         }
     }
@@ -114,7 +114,7 @@ struct WelcomeView: View {
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 18)
-                    .background(SleepTheme.amberGradient, in: RoundedRectangle(cornerRadius: 16))
+                    .background(SleepTheme.accentGradient, in: RoundedRectangle(cornerRadius: 16))
             }
             .buttonStyle(.plain)
 
@@ -156,9 +156,9 @@ private struct ValuePropRow: View {
         HStack(spacing: 16) {
             Image(systemName: icon)
                 .font(.system(size: 20, weight: .medium))
-                .foregroundStyle(SleepTheme.amber)
+                .foregroundStyle(SleepTheme.accent)
                 .frame(width: 44, height: 44)
-                .background(SleepTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12))
+                .background(SleepTheme.card, in: RoundedRectangle(cornerRadius: 12))
 
             Text(text)
                 .font(.system(size: 16, weight: .medium))

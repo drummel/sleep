@@ -41,13 +41,15 @@ struct SleepLog: Identifiable, Sendable {
 
     /// Total time in bed in minutes.
     var timeInBedMinutes: Int {
-        Int(wakeTime.timeIntervalSince(bedtime) / 60)
+        let minutes = Int(wakeTime.timeIntervalSince(bedtime) / 60)
+        return max(0, minutes)
     }
 
     /// Sleep efficiency as a percentage (0-100).
     var sleepEfficiency: Double {
         guard timeInBedMinutes > 0 else { return 0 }
-        return Double(totalSleepMinutes) / Double(timeInBedMinutes) * 100
+        let value = Double(totalSleepMinutes) / Double(timeInBedMinutes) * 100
+        return min(max(value, 0), 100)
     }
 
     /// Duration in minutes including awake time.
@@ -60,11 +62,15 @@ struct SleepLog: Identifiable, Sendable {
         TimeInterval.formatMinutes(totalSleepMinutes)
     }
 
-    /// Date string in YYYY-MM-DD format.
-    var dateString: String {
+    private static let dateStringFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.string(from: date)
+        return formatter
+    }()
+
+    /// Date string in YYYY-MM-DD format.
+    var dateString: String {
+        Self.dateStringFormatter.string(from: date)
     }
 
     /// The sleep onset date (alias for bedtime).

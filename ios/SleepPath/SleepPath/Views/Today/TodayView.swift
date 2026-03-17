@@ -121,7 +121,7 @@ private struct ConfidenceIndicator: View {
     private var confidenceColor: Color {
         switch level {
         case .high, .veryHigh: Color(red: 80/255, green: 210/255, blue: 130/255)
-        case .medium, .mediumHigh: SleepTheme.amber
+        case .medium, .mediumHigh: SleepTheme.accent
         case .low, .lowMedium: SleepTheme.textTertiary
         }
     }

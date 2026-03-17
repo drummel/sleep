@@ -66,7 +66,7 @@ struct NotificationPermissionView: View {
                 .fill(
                     RadialGradient(
                         colors: [
-                            SleepTheme.amber.opacity(0.12),
+                            SleepTheme.accent.opacity(0.12),
                             Color.clear,
                         ],
                         center: .center,
@@ -78,7 +78,7 @@ struct NotificationPermissionView: View {
 
             Image(systemName: "bell.badge.fill")
                 .font(.system(size: 68, weight: .light))
-                .foregroundStyle(SleepTheme.amberGradient)
+                .foregroundStyle(SleepTheme.accentGradient)
                 .symbolEffect(.bounce, value: bellBounce)
         }
     }
@@ -107,7 +107,7 @@ struct NotificationPermissionView: View {
                 subtitle: "Get outside to set your circadian clock"
             )
 
-            Divider().overlay(SleepTheme.cardBackgroundLight)
+            Divider().overlay(SleepTheme.cardLight)
 
             NudgeRow(
                 emoji: "\u{2615}",
@@ -115,7 +115,7 @@ struct NotificationPermissionView: View {
                 subtitle: "Your last-call for coffee today"
             )
 
-            Divider().overlay(SleepTheme.cardBackgroundLight)
+            Divider().overlay(SleepTheme.cardLight)
 
             NudgeRow(
                 emoji: "\u{1F319}",
@@ -125,7 +125,7 @@ struct NotificationPermissionView: View {
         }
         .background(
             RoundedRectangle(cornerRadius: 18)
-                .fill(SleepTheme.cardBackground)
+                .fill(SleepTheme.card)
         )
     }
 
@@ -133,7 +133,7 @@ struct NotificationPermissionView: View {
         HStack(spacing: 8) {
             Image(systemName: "hand.raised.fill")
                 .font(.system(size: 13))
-                .foregroundColor(SleepTheme.amber)
+                .foregroundColor(SleepTheme.accent)
 
             Text("Nothing else. We promise.")
                 .font(.system(size: 14, weight: .semibold))
@@ -154,7 +154,7 @@ struct NotificationPermissionView: View {
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 18)
-                .background(SleepTheme.amberGradient, in: RoundedRectangle(cornerRadius: 16))
+                .background(SleepTheme.accentGradient, in: RoundedRectangle(cornerRadius: 16))
             }
             .buttonStyle(.plain)
 
