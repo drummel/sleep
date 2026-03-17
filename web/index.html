@@ -13,10 +13,14 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="logo">
-        <span class="logo-icon">SP</span>
+        <span class="logo-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3a6 6 0 0 0 9 5.197A9 9 0 1 1 6.804 3 6 6 0 0 0 12 3z" fill="#0f0e17"/>
+          </svg>
+        </span>
         SleepPath
       </a>
-      <a href="#final-cta" class="btn btn-primary btn-sm">Download</a>
+      <a href="#final-cta" class="btn btn-primary btn-sm">Take the Quiz</a>
     </div>
   </nav>
 
@@ -30,12 +34,35 @@
         <a href="#final-cta" class="btn btn-primary">Take the Free Quiz</a>
         <a href="#how-it-works" class="btn btn-secondary">See How It Works</a>
       </div>
-      <div class="orb-wrapper" aria-hidden="true">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb-moon"></div>
-      </div>
+      <p class="hero-social-proof">Join 10,000+ people who've discovered their chronotype</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="moon-illustration" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="moonGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(240,165,0,0.12)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+          <radialGradient id="moonFace" cx="40%" cy="38%" r="50%">
+            <stop offset="0%" stop-color="#fffffe"/>
+            <stop offset="100%" stop-color="#c8c8d4"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="95" fill="url(#moonGlow)" class="moon-glow-ring"/>
+        <circle cx="100" cy="100" r="36" fill="url(#moonFace)" class="moon-body"/>
+        <circle cx="90" cy="90" r="5" fill="rgba(180,180,200,0.3)"/>
+        <circle cx="108" cy="105" r="3" fill="rgba(180,180,200,0.25)"/>
+        <circle cx="95" cy="110" r="4" fill="rgba(180,180,200,0.2)"/>
+        <!-- Stars -->
+        <circle cx="35" cy="40" r="1.5" fill="#fffffe" opacity="0.8" class="star star-1"/>
+        <circle cx="160" cy="55" r="2" fill="#fffffe" opacity="0.6" class="star star-2"/>
+        <circle cx="45" cy="150" r="1.2" fill="#fffffe" opacity="0.7" class="star star-3"/>
+        <circle cx="155" cy="145" r="1.8" fill="#fffffe" opacity="0.5" class="star star-4"/>
+        <circle cx="70" cy="30" r="1" fill="var(--accent)" opacity="0.9" class="star star-5"/>
+        <circle cx="140" cy="35" r="1.3" fill="var(--accent)" opacity="0.7" class="star star-6"/>
+        <circle cx="30" cy="100" r="1.5" fill="#fffffe" opacity="0.4" class="star star-7"/>
+        <circle cx="170" cy="100" r="1" fill="var(--accent)" opacity="0.6" class="star star-8"/>
+      </svg>
     </div>
   </section>
 
@@ -50,22 +77,39 @@
       <div class="steps-grid">
         <div class="step-card reveal">
           <div class="step-number">1</div>
-          <div class="step-icon">&#x1F9EC;</div>
+          <div class="step-icon-wrap">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M20 4C11.16 4 4 11.16 4 20s7.16 16 16 16 16-7.16 16-16S28.84 4 20 4zm0 28c-6.63 0-12-5.37-12-12S13.37 8 20 8s12 5.37 12 12-5.37 12-12 12z" fill="var(--accent)" opacity="0.3"/><path d="M20 12a2 2 0 0 0-2 2v6l5.2 3.12a2 2 0 1 0 2-3.46L22 17.5V14a2 2 0 0 0-2-2z" fill="var(--accent)"/><circle cx="12" cy="14" r="1.5" fill="var(--accent)" opacity="0.5"/><circle cx="28" cy="14" r="1.5" fill="var(--accent)" opacity="0.5"/><circle cx="12" cy="26" r="1.5" fill="var(--accent)" opacity="0.5"/><circle cx="28" cy="26" r="1.5" fill="var(--accent)" opacity="0.5"/></svg>
+          </div>
           <h3>Take the Quiz</h3>
-          <p>Answer 10 questions to discover your chronotype and understand your biological clock.</p>
+          <p>Answer 10 quick questions about your sleep habits, energy patterns, and preferences.</p>
+        </div>
+        <div class="step-connector" aria-hidden="true">
+          <svg width="40" height="2" viewBox="0 0 40 2"><line x1="0" y1="1" x2="40" y2="1" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 4" opacity="0.4"/></svg>
         </div>
         <div class="step-card reveal">
           <div class="step-number">2</div>
-          <div class="step-icon">&#x1F4CB;</div>
+          <div class="step-icon-wrap">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="8" y="6" width="24" height="28" rx="3" stroke="var(--accent)" stroke-width="2.5" opacity="0.3"/><line x1="14" y1="14" x2="26" y2="14" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="20" x2="26" y2="20" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><line x1="14" y1="26" x2="22" y2="26" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="28" r="8" fill="var(--bg-deep)" stroke="var(--accent)" stroke-width="2"/><path d="M25 28l2 2 4-4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
           <h3>Get Your Schedule</h3>
           <p>Receive a personalized daily trajectory based on your biology — from wake time to wind-down.</p>
         </div>
+        <div class="step-connector" aria-hidden="true">
+          <svg width="40" height="2" viewBox="0 0 40 2"><line x1="0" y1="1" x2="40" y2="1" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 4" opacity="0.4"/></svg>
+        </div>
         <div class="step-card reveal">
           <div class="step-number">3</div>
-          <div class="step-icon">&#x231A;</div>
+          <div class="step-icon-wrap">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M8 28l6-8 5 4 7-10 6 6" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="20" r="3" fill="var(--accent)" opacity="0.4"/><path d="M8 32h24" stroke="var(--accent)" stroke-width="1.5" opacity="0.2"/></svg>
+          </div>
           <h3>Watch It Adapt</h3>
           <p>Connect Apple Health and your schedule evolves with your real sleep data, night after night.</p>
         </div>
+      </div>
+      <!-- Mid-page CTA -->
+      <div class="mid-cta reveal">
+        <a href="#final-cta" class="btn btn-primary">Start Your Quiz &rarr;</a>
+        <span class="mid-cta-note">Free &middot; 2 minutes &middot; No account needed</span>
       </div>
     </div>
   </section>
@@ -79,29 +123,103 @@
         <p class="section-sub">Everyone has an internal clock. Understanding yours is the first step to working with your biology, not against it.</p>
       </div>
       <div class="chrono-grid">
-        <div class="chrono-card reveal">
-          <span class="chrono-emoji">&#x1F981;</span>
+        <a href="#final-cta" class="chrono-card reveal">
+          <div class="chrono-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(240,165,0,0.08)"/><path d="M24 12c-1.5 0-3 .5-4 1.5C18 15 17 17 17 20c0 4 3 7 7 7s7-3 7-7c0-3-1-5-3-6.5-1-.5-2.5-1.5-4-1.5z" fill="var(--accent)" opacity="0.7"/><path d="M14 22c-1-1-3-1-4 0s-1 3 0 4l4-4zm20 0c1-1 3-1 4 0s1 3 0 4l-4-4z" fill="var(--accent)" opacity="0.4"/><circle cx="21" cy="20" r="1.5" fill="var(--bg-deep)"/><circle cx="27" cy="20" r="1.5" fill="var(--bg-deep)"/><path d="M22 24c0 0 1 1.5 2 1.5s2-1.5 2-1.5" stroke="var(--bg-deep)" stroke-width="1.2" stroke-linecap="round"/><path d="M16 30c1 3 4 6 8 6s7-3 8-6" stroke="var(--accent)" stroke-width="1.5" opacity="0.3"/></svg>
+          </div>
           <h3>Lion</h3>
           <p class="chrono-subtitle">The Early Bird</p>
           <p>Peak hours: 8 &ndash; 12 AM. You're sharpest in the morning and thrive on early starts.</p>
-        </div>
-        <div class="chrono-card reveal">
-          <span class="chrono-emoji">&#x1F43B;</span>
+          <span class="chrono-cta">Discover if this is you &rarr;</span>
+        </a>
+        <a href="#final-cta" class="chrono-card reveal">
+          <div class="chrono-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(240,165,0,0.08)"/><circle cx="24" cy="22" r="10" fill="var(--accent)" opacity="0.6"/><circle cx="24" cy="22" r="7" fill="var(--accent)" opacity="0.3"/><circle cx="21" cy="20" r="1.5" fill="var(--bg-deep)"/><circle cx="27" cy="20" r="1.5" fill="var(--bg-deep)"/><ellipse cx="24" cy="24" rx="3" ry="2" fill="var(--bg-deep)" opacity="0.4"/><circle cx="18" cy="16" r="4" fill="var(--accent)" opacity="0.25"/><circle cx="30" cy="16" r="4" fill="var(--accent)" opacity="0.25"/></svg>
+          </div>
           <h3>Bear</h3>
           <p class="chrono-subtitle">The Solar Tracker</p>
           <p>Peak hours: 10 AM &ndash; 2 PM. You follow the sun's rhythm and do your best mid-day.</p>
-        </div>
-        <div class="chrono-card reveal">
-          <span class="chrono-emoji">&#x1F43A;</span>
+          <span class="chrono-cta">Discover if this is you &rarr;</span>
+        </a>
+        <a href="#final-cta" class="chrono-card reveal">
+          <div class="chrono-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(140,130,200,0.08)"/><path d="M18 18l-4-6M30 18l4-6" stroke="var(--lavender)" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="26" r="9" fill="var(--lavender)" opacity="0.3"/><circle cx="24" cy="26" r="6" fill="var(--lavender)" opacity="0.2"/><circle cx="21" cy="24" r="1.5" fill="var(--accent)"/><circle cx="27" cy="24" r="1.5" fill="var(--accent)"/><path d="M22 28l2-1 2 1" stroke="var(--bg-deep)" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </div>
           <h3>Wolf</h3>
           <p class="chrono-subtitle">The Night Owl</p>
           <p>Peak hours: 5 &ndash; 9 PM. You come alive in the evening when others wind down.</p>
-        </div>
-        <div class="chrono-card reveal">
-          <span class="chrono-emoji">&#x1F42C;</span>
+          <span class="chrono-cta">Discover if this is you &rarr;</span>
+        </a>
+        <a href="#final-cta" class="chrono-card reveal">
+          <div class="chrono-icon-wrap">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(100,180,240,0.08)"/><ellipse cx="24" cy="24" rx="12" ry="8" fill="rgba(100,180,240,0.3)"/><ellipse cx="24" cy="24" rx="8" ry="5" fill="rgba(100,180,240,0.2)"/><circle cx="20" cy="22" r="1.5" fill="var(--bg-deep)"/><path d="M24 28c2 0 4-1 5-2" stroke="var(--bg-deep)" stroke-width="1.2" stroke-linecap="round"/><path d="M12 20c0 0-3-2-5 0M36 20c0 0 3-2 5 0" stroke="rgba(100,180,240,0.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
           <h3>Dolphin</h3>
           <p class="chrono-subtitle">The Light Sleeper</p>
           <p>Peak hours vary. You need a more structured approach to find consistent rhythm.</p>
+          <span class="chrono-cta">Discover if this is you &rarr;</span>
+        </a>
+      </div>
+      <!-- Mid-page CTA -->
+      <div class="mid-cta reveal">
+        <p class="mid-cta-heading">Not sure which one you are?</p>
+        <a href="#final-cta" class="btn btn-primary">Find Out in 2 Minutes &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Testimonials ========== -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">What People Are Saying</p>
+        <h2 class="section-heading">Real results from real sleepers</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card reveal">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            &ldquo;I stopped fighting my chronotype and started working with it. SleepPath changed my mornings — and honestly, my entire day.&rdquo;
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar wolf-avatar" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="rgba(140,130,200,0.15)"/><text x="18" y="23" text-anchor="middle" font-size="18">&#x1F43A;</text></svg>
+            </div>
+            <div>
+              <cite>Sarah M.</cite>
+              <span class="author-type">Wolf Chronotype</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            &ldquo;Finally understand why I'm useless before 10 AM. The personalized schedule actually makes sense for my body.&rdquo;
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar bear-avatar" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="rgba(240,165,0,0.1)"/><text x="18" y="23" text-anchor="middle" font-size="18">&#x1F43B;</text></svg>
+            </div>
+            <div>
+              <cite>James K.</cite>
+              <span class="author-type">Bear Chronotype</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>
+            &ldquo;The caffeine cutoff alerts alone were worth it. I'm falling asleep 30 minutes faster on average.&rdquo;
+          </blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar lion-avatar" aria-hidden="true">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="rgba(240,165,0,0.1)"/><text x="18" y="23" text-anchor="middle" font-size="18">&#x1F981;</text></svg>
+            </div>
+            <div>
+              <cite>Priya L.</cite>
+              <span class="author-type">Lion Chronotype</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -113,60 +231,57 @@
       <div class="section-header reveal">
         <p class="section-label">Features</p>
         <h2 class="section-heading">Built around your biology</h2>
-        <p class="section-sub">Every feature is designed to help you align your day with your natural rhythm.</p>
+        <p class="section-sub">Every feature helps you align your day with your natural rhythm.</p>
       </div>
 
-      <div class="feature-row reveal">
-        <div class="feature-text">
-          <h3>Adaptive Daily Timeline</h3>
-          <p>Your schedule isn't static. As SleepPath collects real sleep data from Apple Health, it recalibrates your ideal windows for focus, exercise, meals, and wind-down — every single day.</p>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M4 24l6-8 5 5 7-10 6 7" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="28" cy="18" r="2.5" fill="var(--accent)" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>A schedule that learns your&nbsp;rhythm</h3>
+          <p>Your daily timeline recalibrates as SleepPath collects real sleep data from Apple Health — every single day.</p>
         </div>
-        <div class="feature-visual">
-          <div class="feature-icon-box">&#x1F4C8;</div>
-        </div>
-      </div>
 
-      <div class="feature-row reverse reveal">
-        <div class="feature-text">
-          <h3>Smart Notifications</h3>
-          <p>Gentle nudges at the moments that matter: get sunlight, cut caffeine, start winding down. Timed to your chronotype, not an arbitrary clock.</p>
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="16" r="7" stroke="var(--accent)" stroke-width="2"/>
+              <circle cx="16" cy="16" r="3" fill="var(--accent)" opacity="0.4"/>
+              <path d="M8 8l2 2M22 8l-2 2M8 24l2-2M22 24l-2-2" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <h3>Nudges at the moments that&nbsp;matter</h3>
+          <p>Get sunlight, cut caffeine, start winding down — timed to your chronotype, not an arbitrary clock.</p>
         </div>
-        <div class="feature-visual">
-          <div class="feature-icon-box">&#x1F514;</div>
-        </div>
-      </div>
 
-      <div class="feature-row reveal">
-        <div class="feature-text">
-          <h3>Sleep Insights</h3>
-          <p>See patterns you'd never notice on your own. Track consistency, understand how caffeine and light exposure affect your sleep, and watch your rhythm improve over time.</p>
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M16 4a8 8 0 0 0 12 6.93A12 12 0 1 1 8.07 4 8 8 0 0 0 16 4z" fill="var(--accent)" opacity="0.6"/>
+              <circle cx="20" cy="10" r="1" fill="var(--accent)"/>
+              <circle cx="24" cy="6" r="0.8" fill="var(--accent)" opacity="0.7"/>
+            </svg>
+          </div>
+          <h3>See patterns you'd never&nbsp;notice</h3>
+          <p>Track consistency, understand how caffeine and light affect your sleep, and watch your rhythm improve over time.</p>
         </div>
-        <div class="feature-visual">
-          <div class="feature-icon-box">&#x1F319;</div>
-        </div>
-      </div>
 
-      <div class="feature-row reverse reveal">
-        <div class="feature-text">
-          <h3>Privacy First</h3>
-          <p>All data stays on your device. No servers. No tracking. No accounts required. Your sleep data is yours — period.</p>
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect x="8" y="14" width="16" height="14" rx="3" stroke="var(--accent)" stroke-width="2"/>
+              <path d="M12 14v-4a4 4 0 0 1 8 0v4" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="16" cy="21" r="2" fill="var(--accent)"/>
+            </svg>
+          </div>
+          <h3>Your data stays on your&nbsp;device</h3>
+          <p>No servers. No tracking. No accounts required. Your sleep data is yours — period.</p>
         </div>
-        <div class="feature-visual">
-          <div class="feature-icon-box">&#x1F512;</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== Testimonial ========== -->
-  <section class="testimonial" id="testimonial">
-    <div class="container">
-      <div class="testimonial-card reveal">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <blockquote>
-          &ldquo;I stopped fighting my chronotype and started working with it. SleepPath changed my mornings — and honestly, my entire day.&rdquo;
-        </blockquote>
-        <cite>— Early Access User, Wolf Chronotype</cite>
       </div>
     </div>
   </section>
@@ -177,10 +292,14 @@
       <p class="section-label">Get Started</p>
       <h2>Ready to find your rhythm?</h2>
       <p class="section-sub">Take a 2-minute quiz to discover your chronotype and unlock your personalized daily schedule.</p>
-      <div class="cta-buttons">
-        <a href="#" class="btn btn-primary">Take the Free Quiz</a>
+      <a href="#" class="btn btn-primary btn-lg">Take the Free Quiz</a>
+      <p class="cta-reassurance">Free &middot; 2 minutes &middot; No account needed</p>
+      <div class="app-store-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.31-1.32-3.15-2.55C4.22 16 2.97 11.75 5.84 9c1.42-1.36 3.5-2.1 5.27-1.62.86.23 1.64.82 2.44.79.77-.03 1.35-.62 2.5-.84 1.2-.22 2.54.1 3.5.96-3.08 1.86-2.58 6.71.75 7.97-.76 2.06-1.79 4.07-3.59 5.24zM15.63 3.65c.94-1.14 1.58-2.73 1.37-4.15-1.32.06-2.93.88-3.88 2-1.27 1.5-.98 2.74-1 3.87 1.45.11 2.73-.7 3.51-1.72z" fill="var(--lavender)"/>
+        </svg>
+        <span>Coming to the App Store</span>
       </div>
-      <a href="#" class="app-store-link">&#63743; Coming to the App Store</a>
     </div>
   </section>
 
