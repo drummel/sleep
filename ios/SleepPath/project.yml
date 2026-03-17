@@ -2,7 +2,7 @@ name: SleepPath
 
 packages:
   ViewInspector:
-    url: https://github.com/nicklama/ViewInspector
+    url: https://github.com/nalexn/ViewInspector
     from: "0.10.0"
 
 options:

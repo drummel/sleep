@@ -71,7 +71,7 @@ struct WelcomeView: View {
             Image(systemName: "moon.stars.fill")
                 .font(.system(size: 72, weight: .light))
                 .foregroundStyle(SleepTheme.accentGradient)
-                .symbolEffect(.breathe.pulse, options: .repeating, value: logoAppeared)
+                .symbolEffect(.pulse, options: .repeating, value: logoAppeared)
         }
     }
 
