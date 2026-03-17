@@ -4,9 +4,9 @@ struct StatCard: View {
     let icon: String
     let value: String
     let label: String
-    var iconColor: Color = Color(hex: "f0a500")
+    var iconColor: Color = SleepTheme.accent
 
-    private let cardBackground = Color(hex: "232946")
+    private let cardBackground = SleepTheme.card
 
     var body: some View {
         VStack(spacing: 10) {
@@ -35,5 +35,5 @@ struct StatCard: View {
 #Preview {
     StatCard(icon: "moon.zzz", value: "7h 32m", label: "Average Sleep")
         .padding()
-        .background(Color(hex: "0f0e17"))
+        .background(SleepTheme.background)
 }

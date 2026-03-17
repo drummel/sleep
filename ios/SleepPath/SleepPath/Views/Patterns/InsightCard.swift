@@ -5,9 +5,9 @@ struct InsightCard: View {
     let title: String
     let value: String
     var description: String? = nil
-    var iconColor: Color = Color(hex: "f0a500")
+    var iconColor: Color = SleepTheme.accent
 
-    private let cardBackground = Color(hex: "232946")
+    private let cardBackground = SleepTheme.card
 
     var body: some View {
         HStack(spacing: 14) {
@@ -62,5 +62,5 @@ struct InsightCard: View {
         )
     }
     .padding()
-    .background(Color(hex: "0f0e17"))
+    .background(SleepTheme.background)
 }

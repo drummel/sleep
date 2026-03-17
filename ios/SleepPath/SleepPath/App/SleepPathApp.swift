@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct SleepPathApp: App {
-    @State private var hasCompletedOnboarding = false
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
 
     var body: some Scene {
         WindowGroup {

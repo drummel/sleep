@@ -47,6 +47,12 @@ final class TodayViewModel {
         currentEnergyState.suggestion
     }
 
+    private static let blockTimeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter
+    }()
+
     /// A short description of the next upcoming trajectory block.
     var nextBlockDescription: String {
         let now = Date()
@@ -54,9 +60,7 @@ final class TodayViewModel {
             return "No more blocks today"
         }
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a"
-        let timeString = formatter.string(from: nextBlock.startTime)
+        let timeString = Self.blockTimeFormatter.string(from: nextBlock.startTime)
         return "\(nextBlock.title) at \(timeString)"
     }
 

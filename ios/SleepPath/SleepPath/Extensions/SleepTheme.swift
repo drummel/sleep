@@ -11,6 +11,14 @@ enum SleepTheme {
     static let destructive = Color.destructive
     static let success = Color.success
 
+    static let cardLight = Color.appCardElevated
+
+    static let accentGradient = LinearGradient(
+        colors: [Color.appAccent, Color(red: 0.929, green: 0.537, blue: 0.067)],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
     static let amberGradient = LinearGradient(
         colors: [Color.appAccent, Color(red: 0.929, green: 0.537, blue: 0.067)],
         startPoint: .leading,

@@ -2,15 +2,14 @@ import SwiftUI
 
 struct CaffeineCutoffBanner: View {
     let cutoffTime: Date
-    let currentTime: Date
 
     private var isPastCutoff: Bool {
-        currentTime >= cutoffTime
+        Date() >= cutoffTime
     }
 
     private var timeUntilCutoff: String {
         guard !isPastCutoff else { return "" }
-        let interval = cutoffTime.timeIntervalSince(currentTime)
+        let interval = cutoffTime.timeIntervalSince(Date())
         let hours = Int(interval) / 3600
         let minutes = (Int(interval) % 3600) / 60
 
@@ -82,13 +81,11 @@ struct CaffeineCutoffBanner: View {
 
         VStack(spacing: 16) {
             CaffeineCutoffBanner(
-                cutoffTime: Date().addingTimeInterval(3600 * 2.25),
-                currentTime: Date()
+                cutoffTime: Date().addingTimeInterval(3600 * 2.25)
             )
 
             CaffeineCutoffBanner(
-                cutoffTime: Date().addingTimeInterval(-3600),
-                currentTime: Date()
+                cutoffTime: Date().addingTimeInterval(-3600)
             )
         }
         .padding()

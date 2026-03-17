@@ -20,8 +20,7 @@ struct TodayView: View {
 
                     // Caffeine Cutoff Banner
                     CaffeineCutoffBanner(
-                        cutoffTime: caffeineCutoffTime,
-                        currentTime: .now
+                        cutoffTime: caffeineCutoffTime
                     )
                     .opacity(appeared ? 1 : 0)
                     .offset(y: appeared ? 0 : 16)

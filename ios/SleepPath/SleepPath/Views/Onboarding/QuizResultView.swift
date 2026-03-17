@@ -101,8 +101,8 @@ struct QuizResultView: View {
                 value: chronotype.peakHoursDescription
             )
             StatRow(
-                icon: "cup.and.saucer.fill",
-                label: "Ideal caffeine cutoff",
+                icon: "moon.fill",
+                label: "Ideal bedtime",
                 value: chronotype.idealSleepTime
             )
             StatRow(

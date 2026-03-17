@@ -156,11 +156,8 @@ final class PatternsViewModel {
         // Profile info.
         currentChronotype = mockData.userProfile.chronotype
 
-        // Compute insights from the full dataset (via MockDataService).
-        averageSleepDuration = mockData.averageSleepDuration
-        sleepConsistencyScore = mockData.sleepConsistencyScore
-        socialJetlagMinutes = mockData.socialJetlagMinutes
-        caffeineImpactMinutes = mockData.caffeineImpactMinutes
+        // Compute insights from the filtered dataset.
+        computeInsights()
 
         // Confidence based on data volume.
         computeChronotypeConfidence()
@@ -177,6 +174,52 @@ final class PatternsViewModel {
     }
 
     // MARK: - Private
+
+    private func computeInsights() {
+        guard !sleepLogs.isEmpty else {
+            averageSleepDuration = 0
+            sleepConsistencyScore = 0
+            socialJetlagMinutes = 0
+            caffeineImpactMinutes = mockData.caffeineImpactMinutes
+            return
+        }
+
+        // Average sleep duration from filtered logs.
+        let totalMinutes = sleepLogs.reduce(0) { $0 + $1.totalSleepMinutes }
+        averageSleepDuration = totalMinutes / sleepLogs.count
+
+        // Sleep consistency: standard deviation of bedtimes.
+        let calendar = Calendar.current
+        let bedtimeMinutes = sleepLogs.map { log -> Double in
+            var hour = Double(calendar.component(.hour, from: log.bedtime))
+            let minute = Double(calendar.component(.minute, from: log.bedtime))
+            if hour < 12 { hour += 24 } // normalize past-midnight
+            return hour * 60 + minute
+        }
+        let avgBedtime = bedtimeMinutes.reduce(0, +) / Double(bedtimeMinutes.count)
+        let variance = bedtimeMinutes.reduce(0) { $0 + pow($1 - avgBedtime, 2) } / Double(bedtimeMinutes.count)
+        let stdDev = sqrt(variance)
+        // 0 stdDev = 100%, 90+ min stdDev = 0%
+        sleepConsistencyScore = max(0, min(100, 100 - (stdDev / 90 * 100)))
+
+        // Social jetlag: weekday vs weekend sleep midpoint difference.
+        let weekdayLogs = sleepLogs.filter { $0.isWeekday }
+        let weekendLogs = sleepLogs.filter { !$0.isWeekday }
+        if !weekdayLogs.isEmpty && !weekendLogs.isEmpty {
+            func avgMidpoint(_ logs: [SleepLog]) -> Double {
+                logs.reduce(0.0) { total, log in
+                    let mid = log.bedtime.timeIntervalSince1970 + (log.wakeTime.timeIntervalSince1970 - log.bedtime.timeIntervalSince1970) / 2
+                    return total + mid
+                } / Double(logs.count)
+            }
+            let diff = abs(avgMidpoint(weekdayLogs) - avgMidpoint(weekendLogs))
+            socialJetlagMinutes = Int(diff / 60)
+        } else {
+            socialJetlagMinutes = 0
+        }
+
+        caffeineImpactMinutes = mockData.caffeineImpactMinutes
+    }
 
     private func computeChronotypeConfidence() {
         let nightCount = sleepLogs.count

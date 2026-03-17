@@ -12,10 +12,10 @@ struct SleepChartView: View {
     let dataPoints: [SleepDataPoint]
     let averageHours: Double
 
-    private let cardBackground = Color(hex: "232946")
-    private let accentColor = Color(hex: "f0a500")
+    private let cardBackground = SleepTheme.card
+    private let accentColor = SleepTheme.accent
     private let consistentColor = Color.green
-    private let inconsistentColor = Color(hex: "f0a500")
+    private let inconsistentColor = SleepTheme.accent
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -134,5 +134,5 @@ extension SleepChartView {
         averageHours: 7.3
     )
     .padding()
-    .background(Color(hex: "0f0e17"))
+    .background(SleepTheme.background)
 }

@@ -8,7 +8,7 @@ struct SecondaryButton: View {
 
     @State private var isPressed = false
 
-    private let accentColor = Color(hex: "f0a500")
+    private let accentColor = SleepTheme.accent
 
     var body: some View {
         Button(action: action) {
@@ -46,5 +46,5 @@ struct SecondaryButton: View {
         SecondaryButton(title: "Retake Quiz", isInline: true) {}
     }
     .padding()
-    .background(Color(hex: "0f0e17"))
+    .background(SleepTheme.background)
 }
