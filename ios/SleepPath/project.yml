@@ -1,4 +1,10 @@
 name: SleepPath
+
+packages:
+  ViewInspector:
+    url: https://github.com/nicklama/ViewInspector
+    from: "0.10.0"
+
 options:
   bundleIdPrefix: com.fibonaccilabs
   deploymentTarget:
@@ -57,6 +63,7 @@ targets:
           - "**/.DS_Store"
     dependencies:
       - target: SleepPath
+      - package: ViewInspector
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.fibonaccilabs.sleeppath.tests
