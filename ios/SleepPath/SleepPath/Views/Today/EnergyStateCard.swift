@@ -65,6 +65,8 @@ struct EnergyStateCard: View {
                 isPulsing = true
             }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(energyState.displayName) energy. \(timeUntilChange). \(suggestion)")
     }
 
     // MARK: - Computed Colors

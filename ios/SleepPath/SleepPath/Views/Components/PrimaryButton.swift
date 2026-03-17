@@ -5,10 +5,6 @@ struct PrimaryButton: View {
     var icon: String? = nil
     let action: () -> Void
 
-    @State private var isPressed = false
-
-    private let accentColor = SleepTheme.accent
-
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -26,21 +22,14 @@ struct PrimaryButton: View {
                 RoundedRectangle(cornerRadius: 14, style: .continuous)
                     .fill(
                         LinearGradient(
-                            colors: [accentColor, accentColor.opacity(0.8)],
+                            colors: [SleepTheme.accent, SleepTheme.accent.opacity(0.8)],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
             )
-            .scaleEffect(isPressed ? 0.96 : 1.0)
-            .animation(.easeInOut(duration: 0.15), value: isPressed)
         }
-        .buttonStyle(.plain)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in isPressed = true }
-                .onEnded { _ in isPressed = false }
-        )
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 

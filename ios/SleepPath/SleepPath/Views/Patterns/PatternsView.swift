@@ -1,5 +1,4 @@
 import SwiftUI
-import Charts
 
 struct PatternsView: View {
     @Bindable var viewModel: PatternsViewModel
@@ -22,8 +21,14 @@ struct PatternsView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     timeRangePicker
-                    sleepChart
-                    statsGrid
+
+                    if chartData.isEmpty {
+                        emptyState
+                    } else {
+                        sleepChart
+                        statsGrid
+                    }
+
                     chronotypeCard
                     weeklySummaryCard
                 }
@@ -49,6 +54,31 @@ struct PatternsView: View {
             }
         }
         .pickerStyle(.segmented)
+    }
+
+    // MARK: - Empty State
+
+    private var emptyState: some View {
+        VStack(spacing: 16) {
+            Image(systemName: "moon.zzz.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(SleepTheme.textTertiary)
+
+            Text("No sleep data yet")
+                .font(.headline)
+                .foregroundStyle(.white)
+
+            Text("Log your first night of sleep to see patterns and insights here.")
+                .font(.subheadline)
+                .foregroundStyle(.white.opacity(0.6))
+                .multilineTextAlignment(.center)
+        }
+        .padding(32)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(SleepTheme.card)
+        )
     }
 
     // MARK: - Sleep Chart

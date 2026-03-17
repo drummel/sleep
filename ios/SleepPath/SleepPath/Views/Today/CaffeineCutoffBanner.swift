@@ -52,6 +52,8 @@ struct CaffeineCutoffBanner: View {
                         )
                 )
         )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(isPastCutoff ? "Past caffeine cutoff. Protect tonight's sleep." : "Caffeine OK. \(timeUntilCutoff)")
     }
 
     // MARK: - Colors

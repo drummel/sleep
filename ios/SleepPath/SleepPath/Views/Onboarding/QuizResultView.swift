@@ -71,6 +71,7 @@ struct QuizResultView: View {
     private var emojiReveal: some View {
         Text(chronotype.emoji)
             .font(.system(size: 88))
+            .accessibilityLabel(chronotype.displayName)
     }
 
     private var headlineSection: some View {

@@ -68,31 +68,6 @@ extension Color {
     static let warning = Color(red: 0.878, green: 0.655, blue: 0.243)
     static let destructive = Color(red: 0.906, green: 0.298, blue: 0.298)
 
-    // MARK: - Gradients
-
-    static var accentGradient: LinearGradient {
-        LinearGradient(
-            colors: [appAccent, Color(red: 0.929, green: 0.537, blue: 0.067)],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-    }
-
-    static var backgroundGradient: LinearGradient {
-        LinearGradient(
-            colors: [appBackground, Color(red: 0.098, green: 0.098, blue: 0.176)],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-    }
-
-    static var cardGradient: LinearGradient {
-        LinearGradient(
-            colors: [appCard, appCardElevated],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-    }
 }
 
 // MARK: - Hex Initializer

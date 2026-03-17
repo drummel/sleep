@@ -202,6 +202,9 @@ private struct ProgressBarView: View {
             }
         }
         .frame(height: 6)
+        .accessibilityElement()
+        .accessibilityLabel("Quiz progress")
+        .accessibilityValue("\(Int(progress * 100)) percent complete")
     }
 }
 
@@ -243,6 +246,8 @@ private struct OptionCard: View {
             .animation(.easeInOut(duration: 0.2), value: isSelected)
         }
         .buttonStyle(.plain)
+        .accessibilityLabel(option.text)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }
 

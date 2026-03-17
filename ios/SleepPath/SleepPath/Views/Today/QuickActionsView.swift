@@ -98,6 +98,10 @@ private struct SunlightButton: View {
                 }
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(isLogged ? "Sunlight logged" : "Log sunlight")
+        .accessibilityHint("Tap to toggle sunlight logging")
+        .accessibilityAddTraits(.isButton)
     }
 }
 
@@ -148,6 +152,7 @@ private struct CoffeeButton: View {
                                 .fill(Color(red: 160/255, green: 100/255, blue: 30/255))
                         )
                         .offset(x: 4, y: -2)
+                        .transition(.scale.combined(with: .opacity))
                 }
             }
             .scaleEffect(isPressed ? 0.88 : 1.0)
@@ -170,6 +175,10 @@ private struct CoffeeButton: View {
                 }
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Log coffee, \(count) so far")
+        .accessibilityHint("Tap to add a coffee")
+        .accessibilityAddTraits(.isButton)
     }
 }
 
@@ -210,6 +219,10 @@ private struct ShareButton: View {
                 onTap()
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Share")
+        .accessibilityHint("Tap to share your daily trajectory")
+        .accessibilityAddTraits(.isButton)
     }
 }
 

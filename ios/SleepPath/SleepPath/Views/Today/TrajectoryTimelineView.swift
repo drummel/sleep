@@ -152,6 +152,10 @@ private struct TrajectoryTimelineRow: View {
                     .padding(.vertical, -4)
                 : nil
         )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(block.title), \(block.formattedTimeRange)\(block.isActive ? ", current" : "")")
+        .accessibilityHint("Tap for details")
+        .accessibilityAddTraits(.isButton)
     }
 
     private var iconColor: Color {

@@ -51,6 +51,7 @@ struct TodayView: View {
                         nightsCount: viewModel.trajectoryBlocks.count
                     )
                     .opacity(appeared ? 1 : 0)
+                    .offset(y: appeared ? 0 : 16)
 
                     Spacer(minLength: 24)
                 }

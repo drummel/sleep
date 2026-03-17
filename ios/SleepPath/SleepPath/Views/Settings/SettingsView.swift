@@ -25,8 +25,20 @@ struct SettingsView: View {
             } message: {
                 Text("This will permanently delete all your sleep data, patterns, and preferences. This action cannot be undone.")
             }
+            .alert("Data Exported", isPresented: $viewModel.showExportSuccess) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Your sleep data has been exported successfully.")
+            }
         }
         .preferredColorScheme(.dark)
+        .onChange(of: viewModel.shouldRetakeQuiz) { _, shouldRetake in
+            if shouldRetake {
+                viewModel.shouldRetakeQuiz = false
+                // Reset onboarding flag so the app shows onboarding flow
+                UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
+            }
+        }
     }
 
     // MARK: - Profile Section

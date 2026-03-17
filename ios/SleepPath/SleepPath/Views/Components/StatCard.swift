@@ -29,6 +29,8 @@ struct StatCard: View {
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(cardBackground)
         )
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(label): \(value)")
     }
 }
 

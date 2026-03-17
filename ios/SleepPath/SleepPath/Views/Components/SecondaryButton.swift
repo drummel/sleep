@@ -6,10 +6,6 @@ struct SecondaryButton: View {
     var isInline: Bool = false
     let action: () -> Void
 
-    @State private var isPressed = false
-
-    private let accentColor = SleepTheme.accent
-
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -20,23 +16,16 @@ struct SecondaryButton: View {
                 Text(title)
                     .fontWeight(.semibold)
             }
-            .foregroundStyle(accentColor)
+            .foregroundStyle(SleepTheme.accent)
             .frame(maxWidth: isInline ? nil : .infinity)
             .padding(.vertical, 14)
             .padding(.horizontal, isInline ? 24 : 0)
             .background(
                 RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .stroke(accentColor, lineWidth: 1.5)
+                    .stroke(SleepTheme.accent, lineWidth: 1.5)
             )
-            .scaleEffect(isPressed ? 0.96 : 1.0)
-            .animation(.easeInOut(duration: 0.15), value: isPressed)
         }
-        .buttonStyle(.plain)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in isPressed = true }
-                .onEnded { _ in isPressed = false }
-        )
+        .buttonStyle(ScaleButtonStyle())
     }
 }
 
