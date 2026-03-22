@@ -50,8 +50,8 @@ bun run dev
 ```
 
 This starts both services concurrently:
-- **Web** (Nuxt): http://localhost:3000 (blue)
-- **API** (FastAPI): http://localhost:8000 (green)
+- **Web** (Nuxt): http://localhost:3001 (blue)
+- **API** (FastAPI): http://localhost:8001 (green)
 
 Override ports: `WEB_PORT=3005 API_PORT=8005 bun run dev`
 

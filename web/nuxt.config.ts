@@ -33,8 +33,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:8000',
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:8001',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3001',
     },
   },
   devtools: { enabled: false },
