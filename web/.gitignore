@@ -1,2 +1,10 @@
 node_modules/
+.nuxt/
+.output/
+dist/
 screenshots/
+*.log
+.env
+.env.*
+!.env.example
+coverage/
