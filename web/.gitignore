@@ -2,7 +2,8 @@ node_modules/
 .nuxt/
 .output/
 dist/
-screenshots/
+/screenshots/
+!docs/screenshots/
 *.log
 .env
 .env.*

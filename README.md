@@ -8,27 +8,79 @@ SleepPath is a circadian rhythm and chronotype app that helps users discover the
 
 ```
 sleep/
-├── docs/                    # Documentation
-│   ├── sleep-app-mvp-spec-v1.md    # Full product specification
-│   ├── architecture-plan.md         # Architecture & tech decisions
-│   └── ios-best-practices.md        # iOS development guide
-├── web/                     # Static marketing website
-│   ├── index.html           # Single-page marketing site
-│   └── styles.css           # Styles
+├── package.json             # Root orchestration (concurrently)
+├── api/                     # FastAPI backend
+│   ├── app/                 # Application code
+│   │   ├── main.py          # FastAPI entry point
+│   │   ├── routers/         # API endpoints
+│   │   ├── services/        # Business logic
+│   │   └── schemas/         # Pydantic models
+│   ├── tests/               # pytest tests
+│   ├── dev_server.py        # Dev server for concurrently
+│   └── pyproject.toml       # Python deps (uv)
+├── web/                     # Nuxt 3 frontend
+│   ├── app/                 # Pages, components, composables
+│   ├── scripts/             # Screenshot capture
+│   └── package.json         # Web deps (bun)
 ├── ios/                     # Native iOS app
 │   └── SleepPath/           # Xcode project
+├── docs/                    # Documentation
 └── README.md                # This file
 ```
 
 ## Quick Start
 
+**Prerequisites:**
+- [Bun](https://bun.sh/) (`curl -fsSL https://bun.sh/install | bash`)
+- [uv](https://docs.astral.sh/uv/) (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
+- Python 3.11+
+
+### Setup
+
+```bash
+bun run setup
+```
+
+This installs root dependencies, web dependencies (bun), and API dependencies (uv).
+
+### Run Everything
+
+```bash
+bun run dev
+```
+
+This starts both services concurrently:
+- **Web** (Nuxt): http://localhost:3000 (blue)
+- **API** (FastAPI): http://localhost:8000 (green)
+
+Override ports: `WEB_PORT=3005 API_PORT=8005 bun run dev`
+
+### Run Individually
+
+```bash
+bun run dev:web   # Frontend only
+bun run dev:api   # Backend only
+```
+
+### Tests & Linting
+
+```bash
+bun run test      # Run web + API tests in parallel
+bun run lint      # Lint web + API in parallel
+bun run format:api  # Auto-format Python with ruff
+```
+
+### Screenshots
+
+```bash
+bun run screenshot  # Capture all pages at desktop + mobile viewports
+```
+
+Screenshots are saved to `web/docs/screenshots/`.
+
 ### iOS App (Simulator)
 
-**Prerequisites:**
-- macOS with Xcode 15+ installed
-- [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`)
-
-**Setup:**
+**Prerequisites:** macOS with Xcode 15+, [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`)
 
 ```bash
 cd ios/SleepPath
@@ -37,19 +89,6 @@ open SleepPath.xcodeproj
 ```
 
 Then select an iPhone simulator (iPhone 15 Pro recommended) and hit Run (Cmd+R).
-
-**Alternative (without XcodeGen):**
-
-You can also open Xcode, create a new iOS App project named "SleepPath", and drag in all the Swift files from the `SleepPath/` directory. Set the deployment target to iOS 17.0.
-
-### Marketing Website
-
-```bash
-cd web
-open index.html
-# Or use any static file server:
-python3 -m http.server 8080
-```
 
 ## Mock User Account
 
@@ -76,38 +115,23 @@ The app launches directly into the full experience with pre-populated data. All 
 
 ## Tech Stack
 
+- **Frontend:** Nuxt 3, Vue 3, Tailwind CSS 4, shadcn-vue
+- **Backend:** FastAPI, Pydantic, uvicorn
 - **iOS App:** Swift 5.10, SwiftUI, SwiftData, iOS 17+
-- **Architecture:** MVVM with @Observable
-- **Charts:** Swift Charts
-- **Marketing Site:** Static HTML/CSS (no dependencies)
-- **No third-party dependencies** in the iOS app
+- **Package Management:** Bun (web), uv (API)
+- **Orchestration:** concurrently (root)
+- **Testing:** Vitest (web), pytest (API)
+- **Linting:** ESLint (web), Ruff (API)
 
-## Development
+## Screenshots
 
-### Running Tests
+| Landing (Desktop) | Quiz (Desktop) | Compatibility (Desktop) |
+|---|---|---|
+| ![Landing](web/docs/screenshots/landing-desktop.png) | ![Quiz](web/docs/screenshots/quiz-desktop.png) | ![Compatibility](web/docs/screenshots/compatibility-desktop.png) |
 
-After generating the Xcode project:
-
-```bash
-cd ios/SleepPath
-xcodebuild test \
-  -scheme SleepPath \
-  -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
-  -resultBundlePath TestResults
-```
-
-Or use Cmd+U in Xcode.
-
-### Project Structure
-
-The iOS app follows MVVM architecture:
-
-- **Models/** — Data models (SwiftData @Model + plain structs)
-- **Views/** — SwiftUI views organized by feature
-- **ViewModels/** — @Observable view models
-- **Services/** — Business logic (chronotype engine, trajectory generation)
-- **Extensions/** — Swift extensions for colors, dates, view modifiers
-- **Data/** — Mock data for the prototype
+| Landing (Mobile) | Quiz (Mobile) | Compatibility (Mobile) |
+|---|---|---|
+| ![Landing](web/docs/screenshots/landing-mobile.png) | ![Quiz](web/docs/screenshots/quiz-mobile.png) | ![Compatibility](web/docs/screenshots/compatibility-mobile.png) |
 
 ## License
 
